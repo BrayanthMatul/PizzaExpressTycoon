@@ -4,6 +4,8 @@
 
 package com.mycompany.primera_practica_codigo;
 
+import com.mycompany.primera_practica_codigo.vista.FrameLogin;
+
 /**
  *
  * @author brayanth
@@ -11,6 +13,7 @@ package com.mycompany.primera_practica_codigo;
 public class Primera_Practica_Codigo {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        FrameLogin frame = new FrameLogin();
+       frame.setVisible(true);
     }
 }

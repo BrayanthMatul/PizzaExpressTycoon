@@ -1,6 +1,6 @@
-package com.mycompany.primera_practica_codigo.Usuario;
+package com.mycompany.primera_practica_codigo.modelo.entidades;
 
-import com.mycompany.primera_practica_codigo.ClasesIniciales.Sucursal;
+import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
 
 public class SuperAdministrador extends Usuario {
     

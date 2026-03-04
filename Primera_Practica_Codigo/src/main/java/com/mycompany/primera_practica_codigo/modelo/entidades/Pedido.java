@@ -1,4 +1,4 @@
-package com.mycompany.primera_practica_codigo.ClasesIniciales;
+package com.mycompany.primera_practica_codigo.modelo.entidades;
 
 public class Pedido {
     private int idPedido;

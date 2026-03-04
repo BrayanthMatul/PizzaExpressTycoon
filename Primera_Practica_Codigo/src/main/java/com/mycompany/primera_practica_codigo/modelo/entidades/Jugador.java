@@ -1,7 +1,7 @@
-package com.mycompany.primera_practica_codigo.Usuario;
+package com.mycompany.primera_practica_codigo.modelo.entidades;
 
-import com.mycompany.primera_practica_codigo.ClasesIniciales.Sucursal;
-import com.mycompany.primera_practica_codigo.ClasesIniciales.Partida;
+import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
+import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
 
 public class Jugador extends Usuario {
     private int idJugador;

@@ -1,4 +1,4 @@
-package com.mycompany.primera_practica_codigo.ClasesIniciales;
+package com.mycompany.primera_practica_codigo.modelo.entidades;
 
 import java.sql.Time;
 

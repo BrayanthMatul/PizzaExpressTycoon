@@ -1,25 +1,21 @@
-package com.mycompany.primera_practica_codigo.Usuario;
-
-import com.mycompany.primera_practica_codigo.ClasesIniciales.Rol;
+package com.mycompany.primera_practica_codigo.modelo.entidades;
 
 public class Usuario {
     private int idUsuario;
     private String nombreUsuario;
     private String password;
     private String email;
-    private Rol rol;
     private boolean activo;
 
     // Constructores
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String password, String email, Rol rol, boolean activo) {
+    public Usuario(int idUsuario, String nombreUsuario, String password, String email, boolean activo) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.password = password;
         this.email = email;
-        this.rol = rol;
         this.activo = activo;
     }
 
@@ -56,14 +52,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-
     public boolean isActivo() {
         return activo;
     }
@@ -76,5 +64,16 @@ public class Usuario {
     public boolean validarCredenciales() {
         // TODO: implementar
         return false;
+    }
+    
+    public TipoUsuario getTipoUsuario() {
+        if (this instanceof Jugador) {
+            return TipoUsuario.JUGADOR;
+        } else if (this instanceof Administrador) {
+            return TipoUsuario.ADMINISTRADOR;
+        } else if (this instanceof SuperAdministrador) {
+            return TipoUsuario.SUPERADMINISTRADOR;
+        }
+        return null;
     }
 }
