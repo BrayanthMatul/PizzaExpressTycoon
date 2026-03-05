@@ -17,7 +17,7 @@ import java.sql.SQLException;
  *
  * @author brayanth
  */
-public class FrameNuevaSucursal extends javax.swing.JFrame {
+public class FrameEditorSucursal extends javax.swing.JFrame {
 
     private RecolectorDeDatos recolector;
     private boolean errorEnRecolector;
@@ -25,16 +25,41 @@ public class FrameNuevaSucursal extends javax.swing.JFrame {
     private String nombreSucursal;
     private String ubicacion;
     private String telefono;
+    private boolean esEdicion;
+    private int idSucursal;
 
     /**
      * Creates new form FrameNuevaSucursal
      */
-    public FrameNuevaSucursal() {
+    public FrameEditorSucursal() {
         initComponents();
         setLocationRelativeTo(null);
 
         this.errorEnRecolector = false;
         this.errorEnValidacion = false;
+        this.esEdicion = false;
+        
+        jLabelTitle.setText("Crear Nueva Sucursal");
+        jButtonCrearActualizar.setText("Crear");
+
+
+    }
+
+    public FrameEditorSucursal(Sucursal sucursal) {
+        initComponents();
+        setLocationRelativeTo(null);
+
+        this.errorEnRecolector = false;
+        this.errorEnValidacion = false;
+        this.esEdicion = true;
+        this.idSucursal = sucursal.getId();
+
+        jLabelTitle.setText("Editar Sucursal");
+        jButtonCrearActualizar.setText("Actualizar");
+
+        jTextFieldNombreSucursal.setText(sucursal.getNombre());
+        jTextFieldUbicacion.setText(sucursal.getUbicacion());
+        jTextFieldTelefono.setText(sucursal.getTelefono());
     }
 
     private void recolectarDatosSucursal() {
@@ -98,7 +123,7 @@ public class FrameNuevaSucursal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabelCrearSucursal = new javax.swing.JLabel();
+        jLabelTitle = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -111,7 +136,7 @@ public class FrameNuevaSucursal extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jLabelTelefono = new javax.swing.JLabel();
         jTextFieldTelefono = new javax.swing.JTextField();
-        jButtonCrear = new javax.swing.JButton();
+        jButtonCrearActualizar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
@@ -125,9 +150,9 @@ public class FrameNuevaSucursal extends javax.swing.JFrame {
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabelCrearSucursal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabelCrearSucursal.setText("Crear Nueva Sucursal");
-        jPanel2.add(jLabelCrearSucursal);
+        jLabelTitle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelTitle.setText("Crear Nueva Sucursal");
+        jPanel2.add(jLabelTitle);
 
         jPanel1.add(jPanel2);
 
@@ -172,9 +197,9 @@ public class FrameNuevaSucursal extends javax.swing.JFrame {
 
         jPanel5.add(jPanel11);
 
-        jButtonCrear.setText("Crear");
-        jButtonCrear.addActionListener(this::jButtonCrearActionPerformed);
-        jPanel5.add(jButtonCrear);
+        jButtonCrearActualizar.setText("Crear");
+        jButtonCrearActualizar.addActionListener(this::jButtonCrearActualizarActionPerformed);
+        jPanel5.add(jButtonCrearActualizar);
 
         jPanel3.add(jPanel5);
 
@@ -277,15 +302,27 @@ public class FrameNuevaSucursal extends javax.swing.JFrame {
         frameSuperAdmin.setVisible(true);
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
+    private void jButtonCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActualizarActionPerformed
         recolectarDatosSucursal();
 
         if (!errorEnRecolector) {
             validarDatosSucursal();
             if (!errorEnValidacion) {
-                Sucursal nuevaSucursal = new Sucursal(nombreSucursal, ubicacion, telefono);
+                if(!esEdicion){
+                    guardarSucursal();
+                } else {
+                    actualizarSucursal();
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jButtonCrearActualizarActionPerformed
+
+
+    private void guardarSucursal() {
+        Sucursal nuevaSucursal = new Sucursal(nombreSucursal, ubicacion, telefono);
                 SucursalDAO registradorSucursal = new SucursalDAO();
-                try {
+        try {
                     registradorSucursal.insertar(nuevaSucursal);
                     String mensajeExito = "Se registro la sucursal con exito";
                     MensajeExitoFrame mnsExitoFrame = new MensajeExitoFrame(null, true, mensajeExito);
@@ -295,18 +332,33 @@ public class FrameNuevaSucursal extends javax.swing.JFrame {
                     String mensajeError = "Error, no se pudo registrar la sucursal en la base de datos";
                     MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
                 }
-            }
-        }
+        
+    }
 
-    }//GEN-LAST:event_jButtonCrearActionPerformed
+    private void actualizarSucursal() {
+        Sucursal sucursalActualizada = new Sucursal(idSucursal, nombreSucursal, ubicacion, telefono);
+                SucursalDAO registradorSucursal = new SucursalDAO();
+        try {
+                    registradorSucursal.actualizar(sucursalActualizada);
+                    String mensajeExito = "Se actualizo la sucursal con exito";
+                    MensajeExitoFrame mnsExitoFrame = new MensajeExitoFrame(null, true, mensajeExito);
+                    FrameInicioSuperAdministrador frameSuperAdmin = new FrameInicioSuperAdministrador();
+                    frameSuperAdmin.setVisible(true);
+                    this.dispose();
+
+                } catch (SQLException ex) {
+                    String mensajeError = "Error, no se pudo actualizar la sucursal en la base de datos";
+                    MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+                }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCrear;
+    private javax.swing.JButton jButtonCrearActualizar;
     private javax.swing.JButton jButtonRegresar;
-    private javax.swing.JLabel jLabelCrearSucursal;
     private javax.swing.JLabel jLabelNombreSucursal;
     private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelUbicacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

@@ -29,7 +29,7 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
 
     @Override
     public Optional<Sucursal> encontrarPorID(Integer id) throws SQLException {
-        String query = "SELECT * FROM sucursales WHERE id = ?";
+        String query = "SELECT * FROM sucursal WHERE id = ?";
         try (Connection conn = ConexionBD.getConexion();
              PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id);
@@ -50,9 +50,31 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
     }
 
     @Override
+    public Optional<Sucursal> encontrarPorNombre(String nombre) throws SQLException {
+        String query = "SELECT * FROM sucursal WHERE nombre = ?";
+        try (Connection conn = ConexionBD.getConexion();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Sucursal sucursal = new Sucursal(
+                    rs.getInt("id"),
+                    rs.getString("nombre"),
+                    rs.getString("ubicacion"),
+                    rs.getString("telefono")
+                );
+                return Optional.of(sucursal);
+            }
+            return Optional.empty();
+        } catch (SQLException e) {
+            throw new SQLException("Error al buscar sucursal por nombre: " + e.getMessage());
+        }
+    }
+
+    @Override
     public List<Sucursal> obtenerTodo() {
         List<Sucursal> sucursales = new ArrayList<>();
-        String query = "SELECT * FROM sucursales";
+        String query = "SELECT * FROM sucursal";
         try (Connection conn = ConexionBD.getConexion();
              PreparedStatement ps = conn.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
@@ -72,12 +94,22 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
     }
 
     @Override
-    public void actualizar(Sucursal entidad) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void actualizar(Sucursal entidad) throws SQLException {
+        String query = "UPDATE sucursal SET nombre = ?, ubicacion = ?, telefono = ? WHERE id = ?";
+        try (Connection conn = ConexionBD.getConexion();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, entidad.getNombre());
+            ps.setString(2, entidad.getUbicacion());
+            ps.setString(3, entidad.getTelefono());
+            ps.setInt(4, entidad.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Error al actualizar sucursal: " + e.getMessage());
+        }
     }
 
     @Override
-    public void eliminar(Integer id) throws Exception {
+    public void eliminar(Integer id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

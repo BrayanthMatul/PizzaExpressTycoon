@@ -1,23 +1,28 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package com.mycompany.primera_practica_codigo.vista.superadmin.gestionSucursales;
 
+import com.mycompany.primera_practica_codigo.modelo.dao.SucursalDAO;
+import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
+import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
+import javax.swing.JFrame;
+
 /**
  *
- * @author brayanth
+ * @author Matul
  */
-public class FrameEditarSucursal extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameEditarSucursal.class.getName());
+public class FrameBuscadorSucursal extends javax.swing.JDialog {
 
+    JFrame frameAnterior;
     /**
-     * Creates new form FrameEditarSucursal
+     * Creates new form FrameBuscadorSucursal
      */
-    public FrameEditarSucursal() {
+    public FrameBuscadorSucursal(java.awt.Frame parent, boolean modal, JFrame frameAnterior) {
+        super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
+        this.frameAnterior = frameAnterior;
     }
 
     /**
@@ -30,21 +35,15 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabelCrearSucursal = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabelBuscarEditarSucursal = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabelNombreSucursal = new javax.swing.JLabel();
         jTextFieldNombreSucursal = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
-        jLabelUbicacion = new javax.swing.JLabel();
-        jTextFieldUbicacion = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
-        jLabelTelefono = new javax.swing.JLabel();
-        jTextFieldTelefono = new javax.swing.JTextField();
-        jButtonCrear = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
@@ -54,13 +53,14 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
-        jLabelCrearSucursal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabelCrearSucursal.setText("Editar Datos Sucursal");
-        jPanel1.add(jLabelCrearSucursal);
+        jLabelBuscarEditarSucursal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelBuscarEditarSucursal.setText("Ingrese el nombre de la sucursal que desea editar");
+        jPanel2.add(jLabelBuscarEditarSucursal);
+
         jPanel1.add(jPanel2);
 
         jPanel3.setLayout(new java.awt.GridLayout());
@@ -69,11 +69,11 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 126, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel4);
@@ -82,31 +82,19 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
 
         jPanel9.setLayout(new java.awt.GridLayout(0, 1));
 
-        jLabelNombreSucursal.setText("Nuevo Nombre Sucursal");
+        jLabelNombreSucursal.setText("Nombre Sucursal");
         jPanel9.add(jLabelNombreSucursal);
         jPanel9.add(jTextFieldNombreSucursal);
 
         jPanel5.add(jPanel9);
 
-        jPanel10.setLayout(new java.awt.GridLayout(0, 1));
-
-        jLabelUbicacion.setText("Ubicacion");
-        jPanel10.add(jLabelUbicacion);
-        jPanel10.add(jTextFieldUbicacion);
-
-        jPanel5.add(jPanel10);
-
-        jPanel11.setLayout(new java.awt.GridLayout(0, 1));
-
-        jLabelTelefono.setText("Telefono");
-        jPanel11.add(jLabelTelefono);
-        jPanel11.add(jTextFieldTelefono);
-
-        jPanel5.add(jPanel11);
-
-        jButtonCrear.setText("Crear");
-        jButtonCrear.addActionListener(this::jButtonCrearActionPerformed);
-        jPanel5.add(jButtonCrear);
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButtonBuscar);
 
         jPanel3.add(jPanel5);
 
@@ -114,11 +102,11 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 126, Short.MAX_VALUE)
         );
 
         jPanel3.add(jPanel6);
@@ -131,11 +119,11 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
+            .addGap(0, 72, Short.MAX_VALUE)
         );
 
         jPanel17.add(jPanel19);
@@ -146,7 +134,7 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,14 +144,18 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         jPanel20.add(jPanel7);
 
         jButtonRegresar.setText("Regresar");
-        jButtonRegresar.addActionListener(this::jButtonRegresarActionPerformed);
+        jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegresarActionPerformed(evt);
+            }
+        });
         jPanel20.add(jButtonRegresar);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,11 +170,11 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
+            .addGap(0, 72, Short.MAX_VALUE)
         );
 
         jPanel17.add(jPanel18);
@@ -203,69 +195,38 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
-        recolectarDatosSucursal();
-
-        if (!errorEnRecolector) {
-            validarDatosSucursal();
-            if (!errorEnValidacion) {
-                Sucursal nuevaSucursal = new Sucursal(nombreSucursal, ubicacion, telefono);
-                SucursalDAO registradorSucursal = new SucursalDAO();
-                try {
-                    registradorSucursal.insertar(nuevaSucursal);
-                    String mensajeExito = "Se registro la sucursal con exito";
-                    MensajeExitoFrame mnsExitoFrame = new MensajeExitoFrame(null, true, mensajeExito);
-                    limpiarCampos();
-
-                } catch (SQLException ex) {
-                    String mensajeError = "Error, no se pudo registrar la sucursal en la base de datos";
-                    MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
-                }
-            }
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+       SucursalDAO sucursalDAO = new SucursalDAO();
+       String nombreSucursal = jTextFieldNombreSucursal.getText();
+       try {
+        Sucursal sucursal = sucursalDAO.encontrarPorNombre(nombreSucursal).orElse(null);
+        if (sucursal != null) {
+            FrameEditorSucursal frameEditarSucursal = new FrameEditorSucursal(sucursal);
+            frameEditarSucursal.setVisible(true);
+            this.dispose();
+            this.frameAnterior.dispose();
+            
+        } else {
+            String mensajeError = "No se encontró ninguna sucursal con el nombre: " + nombreSucursal;
+            MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
         }
-    }//GEN-LAST:event_jButtonCrearActionPerformed
+    } catch (Exception e) {
+        String mensajeError = "Error al buscar la sucursal: " + nombreSucursal;
+        MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+    }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
-        this.dispose();
-        FrameInicioSuperAdministrador frameSuperAdmin = new FrameInicioSuperAdministrador();
-        frameSuperAdmin.setVisible(true);
+       
     }//GEN-LAST:event_jButtonRegresarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrameEditarSucursal().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCrear;
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonRegresar;
-    private javax.swing.JLabel jLabelCrearSucursal;
+    private javax.swing.JLabel jLabelBuscarEditarSucursal;
     private javax.swing.JLabel jLabelNombreSucursal;
-    private javax.swing.JLabel jLabelTelefono;
-    private javax.swing.JLabel jLabelUbicacion;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
@@ -279,7 +240,5 @@ public class FrameEditarSucursal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextFieldNombreSucursal;
-    private javax.swing.JTextField jTextFieldTelefono;
-    private javax.swing.JTextField jTextFieldUbicacion;
     // End of variables declaration//GEN-END:variables
 }

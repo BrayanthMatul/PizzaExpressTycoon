@@ -10,6 +10,8 @@ public abstract class BDCRUD<T, ID> {
 
     public abstract Optional<T> encontrarPorID(ID id) throws Exception;
 
+    public abstract Optional<T> encontrarPorNombre(String nombre) throws Exception;
+
     public abstract List<T> obtenerTodo();
 
     public abstract void actualizar(T entidad) throws Exception;

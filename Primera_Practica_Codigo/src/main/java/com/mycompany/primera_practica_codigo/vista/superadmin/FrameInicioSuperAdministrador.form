@@ -115,11 +115,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Editar sucursal existente"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarSucursalExistenteActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonListaSucursales">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Lista de sucursales"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListaSucursalesActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
