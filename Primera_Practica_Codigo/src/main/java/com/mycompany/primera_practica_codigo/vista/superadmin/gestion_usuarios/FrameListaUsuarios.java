@@ -74,113 +74,119 @@ public class FrameListaUsuarios extends javax.swing.JFrame {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
-        private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-                jPanel1 = new javax.swing.JPanel();
-                jPanelTitle = new javax.swing.JPanel();
-                jLabelTitle = new javax.swing.JLabel();
-                jPanelListaUsuarios = new javax.swing.JPanel();
-                jScrollPane1 = new javax.swing.JScrollPane();
-                jTable1 = new javax.swing.JTable();
-                jPanelRegresar = new javax.swing.JPanel();
-                jPanel19 = new javax.swing.JPanel();
-                jPanel20 = new javax.swing.JPanel();
-                jButtonRegresar = new javax.swing.JButton();
-                jPanel12 = new javax.swing.JPanel();
-                jPanel18 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanelTitle = new javax.swing.JPanel();
+        jLabelTitle = new javax.swing.JLabel();
+        jPanelListaUsuarios = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanelRegresar = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jButtonRegresar = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
 
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
-                jLabelTitle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-                jLabelTitle.setText("Lista De Usuarios");
-                jPanelTitle.add(jLabelTitle);
+        jLabelTitle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabelTitle.setText("Lista De Usuarios");
+        jPanelTitle.add(jLabelTitle);
 
-                jPanel1.add(jPanelTitle);
+        jPanel1.add(jPanelTitle);
 
-                jPanelListaUsuarios.setLayout(new java.awt.GridLayout(0, 1, 0, 30));
+        jPanelListaUsuarios.setLayout(new java.awt.GridLayout(0, 1, 0, 30));
 
-                jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                                new Object[][] {
-                                                { null, null, null, null },
-                                                { null, null, null, null },
-                                                { null, null, null, null },
-                                                { null, null, null, null }
-                                },
-                                new String[] {
-                                                "#", "Nombre", "Sucursal", "Rol"
-                                }));
-                jScrollPane1.setViewportView(jTable1);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "#", "Nombre", "Sucursal", "Rol"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-                jPanelListaUsuarios.add(jScrollPane1);
+        jPanelListaUsuarios.add(jScrollPane1);
 
-                jPanel1.add(jPanelListaUsuarios);
+        jPanel1.add(jPanelListaUsuarios);
 
-                jPanelRegresar.setLayout(new java.awt.GridLayout(1, 0));
+        jPanelRegresar.setLayout(new java.awt.GridLayout(1, 0));
 
-                javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-                jPanel19.setLayout(jPanel19Layout);
-                jPanel19Layout.setHorizontalGroup(
-                                jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 133, Short.MAX_VALUE));
-                jPanel19Layout.setVerticalGroup(
-                                jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 48, Short.MAX_VALUE));
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 273, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
 
-                jPanelRegresar.add(jPanel19);
+        jPanelRegresar.add(jPanel19);
 
-                jPanel20.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel20.setLayout(new java.awt.GridLayout(0, 1));
 
-                jButtonRegresar.setText("Regresar");
-                jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jButtonRegresarActionPerformed(evt);
-                        }
-                });
-                jPanel20.add(jButtonRegresar);
+        jButtonRegresar.setText("Regresar");
+        jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegresarActionPerformed(evt);
+            }
+        });
+        jPanel20.add(jButtonRegresar);
 
-                javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-                jPanel12.setLayout(jPanel12Layout);
-                jPanel12Layout.setHorizontalGroup(
-                                jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 133, Short.MAX_VALUE));
-                jPanel12Layout.setVerticalGroup(
-                                jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 24, Short.MAX_VALUE));
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 273, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 24, Short.MAX_VALUE)
+        );
 
-                jPanel20.add(jPanel12);
+        jPanel20.add(jPanel12);
 
-                jPanelRegresar.add(jPanel20);
+        jPanelRegresar.add(jPanel20);
 
-                javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-                jPanel18.setLayout(jPanel18Layout);
-                jPanel18Layout.setHorizontalGroup(
-                                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 133, Short.MAX_VALUE));
-                jPanel18Layout.setVerticalGroup(
-                                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 48, Short.MAX_VALUE));
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 273, Short.MAX_VALUE)
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
+        );
 
-                jPanelRegresar.add(jPanel18);
+        jPanelRegresar.add(jPanel18);
 
-                jPanel1.add(jPanelRegresar);
+        jPanel1.add(jPanelRegresar);
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-                getContentPane().setLayout(layout);
-                layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 400,
-                                                                Short.MAX_VALUE));
-                layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 146,
-                                                                Short.MAX_VALUE));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+        );
 
-                pack();
-        }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
         private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRegresarActionPerformed
                 FrameInicioSuperAdministrador frameInicioSuperAdministrador = new FrameInicioSuperAdministrador();
@@ -188,18 +194,18 @@ public class FrameListaUsuarios extends javax.swing.JFrame {
                 this.dispose();
         }// GEN-LAST:event_jButtonRegresarActionPerformed
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton jButtonRegresar;
-        private javax.swing.JLabel jLabelTitle;
-        private javax.swing.JPanel jPanel1;
-        private javax.swing.JPanel jPanel12;
-        private javax.swing.JPanel jPanel18;
-        private javax.swing.JPanel jPanel19;
-        private javax.swing.JPanel jPanel20;
-        private javax.swing.JPanel jPanelListaUsuarios;
-        private javax.swing.JPanel jPanelRegresar;
-        private javax.swing.JPanel jPanelTitle;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTable jTable1;
-        // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonRegresar;
+    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanelListaUsuarios;
+    private javax.swing.JPanel jPanelRegresar;
+    private javax.swing.JPanel jPanelTitle;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
 }

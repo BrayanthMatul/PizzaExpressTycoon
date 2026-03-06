@@ -330,7 +330,7 @@ public class FrameInicioSuperAdministrador extends javax.swing.JFrame {
 
                 try {
                         if (hayMasDeUnUsuario()) {
-                                FrameBuscadorUsuario buscadorUsuario = new FrameBuscadorUsuario();
+                                FrameBuscadorUsuario buscadorUsuario = new FrameBuscadorUsuario(this);
                                 buscadorUsuario.setVisible(true);
                         } else {
                                 String mensajeError = "No hay suficientes usuarios registrados.";

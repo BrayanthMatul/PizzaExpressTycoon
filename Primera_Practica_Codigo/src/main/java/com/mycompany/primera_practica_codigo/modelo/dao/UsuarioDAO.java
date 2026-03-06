@@ -9,6 +9,7 @@ import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
 import com.mycompany.primera_practica_codigo.util.BDCRUD;
 import com.mycompany.primera_practica_codigo.util.ConexionBD;
+import com.mycompany.primera_practica_codigo.util.UsuarioDatosSQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,86 +44,96 @@ public class UsuarioDAO extends BDCRUD<Usuario, Integer> {
 
     @Override
     public Optional<Usuario> encontrarPorID(Integer id) throws SQLException {
-        String query = "SELECT * FROM usuario WHERE id_usuario = ?";
-        try (Connection conn = ConexionBD.getConexion();
-                PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id"));
-                usuario.setNombreUsuario(rs.getString("nombre_usuario"));
-                usuario.setPassword(rs.getString("password"));
-                usuario.setRol(obtenerRolPorId(rs.getInt("rol_id")));
-                usuario.setSucursal(obtenerSucursalPorId(rs.getInt("sucursal_id")));
-                return Optional.of(usuario);
-            }
-        } catch (SQLException e) {
-            throw new SQLException("Error al encontrar usuario por ID: " + e.getMessage());
-        }
-        return Optional.empty();
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Optional<Usuario> encontrarPorNombre(String nombre) throws SQLException {
+        Usuario usuario = null;
+        UsuarioDatosSQL usuarioDatosSQL = obtenerUsuarioDatosSQLPorNombre(nombre);
+        if (usuarioDatosSQL != null) {
+            usuario = new Usuario();
+            usuario.setIdUsuario(usuarioDatosSQL.getId());
+            usuario.setNombreUsuario(usuarioDatosSQL.getNombreUsuario());
+            usuario.setPassword(usuarioDatosSQL.getPassword());
+            usuario.setRol(obtenerRolPorId(usuarioDatosSQL.getRolId()));
+            usuario.setSucursal(obtenerSucursalPorId(usuarioDatosSQL.getSucursalId()));
+            return Optional.of(usuario);
+        }
+        return Optional.empty();
+    }
+
+    private UsuarioDatosSQL obtenerUsuarioDatosSQLPorNombre(String nombre) throws SQLException {
         String query = "SELECT * FROM usuario WHERE nombre_usuario = ?";
         try (Connection conn = ConexionBD.getConexion();
                 PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id"));
-                usuario.setNombreUsuario(rs.getString("nombre_usuario"));
-                usuario.setPassword(rs.getString("password"));
-                usuario.setRol(obtenerRolPorId(rs.getInt("rol_id")));
-                usuario.setSucursal(obtenerSucursalPorId(rs.getInt("sucursal_id")));
-                return Optional.of(usuario);
+                UsuarioDatosSQL usuarioDatosSQL = new UsuarioDatosSQL();
+                usuarioDatosSQL.setId(rs.getInt("id"));
+                usuarioDatosSQL.setNombreUsuario(rs.getString("nombre_usuario"));
+                usuarioDatosSQL.setPassword(rs.getString("password"));
+                usuarioDatosSQL.setRolId(rs.getInt("rol_id"));
+                usuarioDatosSQL.setSucursalId(rs.getInt("sucursal_id"));
+                return usuarioDatosSQL;
             }
         } catch (SQLException e) {
-            throw new SQLException("Error al encontrar usuario por nombre: " + e.getMessage());
+            throw new SQLException("Error al obtener datos SQL de usuario por nombre: " + e.getMessage());
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
     public List<Usuario> obtenerTodo() throws SQLException {
+        List<UsuarioDatosSQL> usuariosDatosSQLs = obtenerUsuariosDatosSQL();
+
+        List<Usuario> usuarios = new ArrayList<>();
+        for (UsuarioDatosSQL usuarioDatosSQL : usuariosDatosSQLs) {
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(usuarioDatosSQL.getId());
+            usuario.setNombreUsuario(usuarioDatosSQL.getNombreUsuario());
+            usuario.setPassword(usuarioDatosSQL.getPassword());
+            usuario.setRol(obtenerRolPorId(usuarioDatosSQL.getRolId()));
+            usuario.setSucursal(obtenerSucursalPorId(usuarioDatosSQL.getSucursalId()));
+            usuarios.add(usuario);
+        }
+
+        return usuarios;
+    }
+
+    private List<UsuarioDatosSQL> obtenerUsuariosDatosSQL() throws SQLException {
+        List<UsuarioDatosSQL> usuariosDatosSQLs = new ArrayList<>();
         String query = "SELECT * FROM usuario";
         try (Connection conn = ConexionBD.getConexion();
                 PreparedStatement ps = conn.prepareStatement(query);
                 ResultSet rs = ps.executeQuery()) {
-            List<Usuario> usuarios = new ArrayList<>();
             while (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id"));
-                usuario.setNombreUsuario(rs.getString("nombre_usuario"));
-                usuario.setPassword(rs.getString("password"));
-                int rolId = rs.getInt("rol_id");
-                int sucursalId = rs.getInt("sucursal_id");
-                usuario.setRol(obtenerRolPorId(rolId));
-                if (sucursalId != 0) {
-                    usuario.setSucursal(obtenerSucursalPorId(sucursalId));
-                } else {
-                    usuario.setSucursal(null);
-                }
-                usuarios.add(usuario);
+                UsuarioDatosSQL usuarioDatosSQL = new UsuarioDatosSQL();
+                usuarioDatosSQL.setId(rs.getInt("id"));
+                usuarioDatosSQL.setNombreUsuario(rs.getString("nombre_usuario"));
+                usuarioDatosSQL.setPassword(rs.getString("password"));
+                usuarioDatosSQL.setRolId(rs.getInt("rol_id"));
+                usuarioDatosSQL.setSucursalId(rs.getInt("sucursal_id"));
+                usuariosDatosSQLs.add(usuarioDatosSQL);
             }
-            return usuarios;
         } catch (SQLException e) {
-            throw new SQLException("Error al obtener usuarios: " + e.getMessage());
+            throw new SQLException("Error al obtener datos SQL de usuarios: " + e.getMessage());
         }
+        return usuariosDatosSQLs;
     }
 
     @Override
     public void actualizar(Usuario entidad) throws SQLException {
+        int idRol = obtenerIdRol(entidad.getRol());
+        int idSucursal = obtenerIdSucursal(entidad.getSucursal());
         String query = "UPDATE usuario SET nombre_usuario = ?, password = ?, rol_id = ?, sucursal_id = ? WHERE id = ?";
         try (Connection conn = ConexionBD.getConexion();
                 PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, entidad.getNombreUsuario());
             ps.setString(2, entidad.getPassword());
-            int idRol = obtenerIdRol(entidad.getRol());
             ps.setInt(3, idRol);
-            int idSucursal = obtenerIdSucursal(entidad.getSucursal());
             ps.setInt(4, idSucursal);
             ps.setInt(5, entidad.getIdUsuario());
             ps.executeUpdate();
@@ -179,6 +190,10 @@ public class UsuarioDAO extends BDCRUD<Usuario, Integer> {
     }
 
     private Sucursal obtenerSucursalPorId(int idSucursal) throws SQLException {
+        if (idSucursal == 0) {
+            return null; // no hay sucursal asociada
+
+        }
         SucursalDAO sucursalDAO = new SucursalDAO();
         try {
             Optional<Sucursal> sucursalOpt = sucursalDAO.encontrarPorID(idSucursal);

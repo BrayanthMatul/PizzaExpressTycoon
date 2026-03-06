@@ -92,7 +92,7 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -132,11 +132,13 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE));
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 153, Short.MAX_VALUE)
+        );
         jPanel4Layout.setVerticalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 194, Short.MAX_VALUE));
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 194, Short.MAX_VALUE)
+        );
 
         jPanel3.add(jPanel4);
 
@@ -144,24 +146,21 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
 
         jPanel9.setLayout(new java.awt.GridLayout(0, 1));
 
-        jComboBoxUsuarios.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel9.add(jComboBoxUsuarios);
 
         jPanel5.add(jPanel9);
 
         jPanel10.setLayout(new java.awt.GridLayout(0, 1));
 
-        jComboBoxSucursales.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSucursales.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel10.add(jComboBoxSucursales);
 
         jPanel5.add(jPanel10);
 
         jPanel11.setLayout(new java.awt.GridLayout(0, 1));
 
-        jComboBoxRoles.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel11.add(jComboBoxRoles);
 
         jPanel5.add(jPanel11);
@@ -179,11 +178,13 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
-                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE));
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 153, Short.MAX_VALUE)
+        );
         jPanel6Layout.setVerticalGroup(
-                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 194, Short.MAX_VALUE));
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 194, Short.MAX_VALUE)
+        );
 
         jPanel3.add(jPanel6);
 
@@ -194,11 +195,13 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
-                jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE));
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 153, Short.MAX_VALUE)
+        );
         jPanel19Layout.setVerticalGroup(
-                jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 72, Short.MAX_VALUE));
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 72, Short.MAX_VALUE)
+        );
 
         jPanel17.add(jPanel19);
 
@@ -207,11 +210,13 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE));
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 153, Short.MAX_VALUE)
+        );
         jPanel7Layout.setVerticalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 24, Short.MAX_VALUE));
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 24, Short.MAX_VALUE)
+        );
 
         jPanel20.add(jPanel7);
 
@@ -226,11 +231,13 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
-                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE));
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 153, Short.MAX_VALUE)
+        );
         jPanel8Layout.setVerticalGroup(
-                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 24, Short.MAX_VALUE));
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 24, Short.MAX_VALUE)
+        );
 
         jPanel20.add(jPanel8);
 
@@ -239,11 +246,13 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 153, Short.MAX_VALUE)
+        );
         jPanel18Layout.setVerticalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 72, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 72, Short.MAX_VALUE)
+        );
 
         jPanel17.add(jPanel18);
 
@@ -252,13 +261,13 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -266,7 +275,7 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
     private void jButtonAsignarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonAsignarActionPerformed
         String nombreUsuario = (String) jComboBoxUsuarios.getSelectedItem();
         String nombreSucursal = (String) jComboBoxSucursales.getSelectedItem();
-        Rol rolSeleccionado = (Rol) jComboBoxRoles.getSelectedItem();
+        Rol rolSeleccionado = obtenerRolSeleccionado();
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         SucursalDAO sucursalDAO = new SucursalDAO();
@@ -290,6 +299,17 @@ public class FrameAsignarSucursal extends javax.swing.JFrame {
             MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensaje);
         }
     }// GEN-LAST:event_jButtonAsignarActionPerformed
+
+    private Rol obtenerRolSeleccionado() {
+        String rolSeleccionado = (String) jComboBoxRoles.getSelectedItem();
+        if ("Administrador Sucursal".equals(rolSeleccionado)) {
+            return Rol.ADMINISTRADOR_SUCURSAL;
+        } else if ("Jugador".equals(rolSeleccionado)) {
+            return Rol.JUGADOR;
+        } else {
+            throw new IllegalArgumentException("Rol desconocido: " + rolSeleccionado);
+        }
+    }
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRegresarActionPerformed
         FrameInicioSuperAdministrador frameGestionUsuarios = new FrameInicioSuperAdministrador();
