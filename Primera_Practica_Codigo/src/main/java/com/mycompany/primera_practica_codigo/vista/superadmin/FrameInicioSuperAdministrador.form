@@ -147,21 +147,33 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Registrar nuevo usuario"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegistroUsuarioActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonModificarUsuario">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Modificar usuario"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonModificarUsuarioActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonAsignarUsurioASucursal">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Asignar usuario a sucursal"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAsignarUsurioASucursalActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonListaUsuarios">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Lista de todos los usuarios"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListaUsuariosActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

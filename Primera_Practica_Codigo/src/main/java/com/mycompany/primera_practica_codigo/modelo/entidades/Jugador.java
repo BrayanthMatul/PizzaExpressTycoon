@@ -5,7 +5,6 @@ import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
 
 public class Jugador extends Usuario {
     private int idJugador;
-    private Sucursal sucursal;
     private int partidasJugadas;
     private int nivelMaximoAlcanzado;
     private int puntajeMaximo;
@@ -16,11 +15,10 @@ public class Jugador extends Usuario {
         super();
     }
 
-    public Jugador(int idJugador, Sucursal sucursal, int partidasJugadas, int nivelMaximoAlcanzado, 
-                   int puntajeMaximo, int puntajeAcumulado) {
+    public Jugador(int idJugador, int partidasJugadas, int nivelMaximoAlcanzado,
+            int puntajeMaximo, int puntajeAcumulado) {
         super();
         this.idJugador = idJugador;
-        this.sucursal = sucursal;
         this.partidasJugadas = partidasJugadas;
         this.nivelMaximoAlcanzado = nivelMaximoAlcanzado;
         this.puntajeMaximo = puntajeMaximo;
@@ -34,14 +32,6 @@ public class Jugador extends Usuario {
 
     public void setIdJugador(int idJugador) {
         this.idJugador = idJugador;
-    }
-
-    public Sucursal getSucursal() {
-        return sucursal;
-    }
-
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
     }
 
     public int getPartidasJugadas() {
@@ -75,24 +65,24 @@ public class Jugador extends Usuario {
     public void setPuntajeAcumulado(int puntajeAcumulado) {
         this.puntajeAcumulado = puntajeAcumulado;
     }
-    
+
     // Métodos
     public void actualizarEstadisticas(Partida partida) {
         // TODO: implementar
     }
-    
+
     public void incrementarPartidasJugadas() {
         // TODO: implementar
     }
-    
+
     public void actualizarNivelMaximo(int nivel) {
         // TODO: implementar
     }
-    
+
     public void actualizarPuntajeMaximo(int puntaje) {
         // TODO: implementar
     }
-    
+
     public void agregarPuntajeAcumulado(int puntaje) {
         // TODO: implementar
     }

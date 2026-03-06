@@ -4,22 +4,28 @@ public class Usuario {
     private int idUsuario;
     private String nombreUsuario;
     private String password;
-    private String email;
-    private boolean activo;
+    private Rol rol;
+    private Sucursal sucursal;
 
     // Constructores
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String password, String email, boolean activo) {
+    public Usuario(int idUsuario, String nombreUsuario, String password, Rol rol, Sucursal sucursal) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.password = password;
-        this.email = email;
-        this.activo = activo;
+        this.rol = rol;
+        this.sucursal = sucursal;
     }
 
-    // Getters y Setters
+    public Usuario(String nombreUsuario, String password, Rol rol, Sucursal sucursal) {
+        this.nombreUsuario = nombreUsuario;
+        this.password = password;
+        this.rol = rol;
+        this.sucursal = sucursal;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -44,36 +50,26 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public Sucursal getSucursal() {
+        return sucursal;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
-    
+
     // Métodos
     public boolean validarCredenciales() {
         // TODO: implementar
         return false;
     }
-    
-    public TipoUsuario getTipoUsuario() {
-        if (this instanceof Jugador) {
-            return TipoUsuario.JUGADOR;
-        } else if (this instanceof Administrador) {
-            return TipoUsuario.ADMINISTRADOR;
-        } else if (this instanceof SuperAdministrador) {
-            return TipoUsuario.SUPERADMINISTRADOR;
-        }
-        return null;
-    }
+
 }

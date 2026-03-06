@@ -17,7 +17,7 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
     public void insertar(Sucursal sucursal) throws SQLException {
         String query = "INSERT INTO sucursal (nombre, ubicacion, telefono) VALUES (?, ?, ?)";
         try (Connection conn = ConexionBD.getConexion();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+                PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, sucursal.getNombre());
             ps.setString(2, sucursal.getUbicacion());
             ps.setString(3, sucursal.getTelefono());
@@ -31,16 +31,15 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
     public Optional<Sucursal> encontrarPorID(Integer id) throws SQLException {
         String query = "SELECT * FROM sucursal WHERE id = ?";
         try (Connection conn = ConexionBD.getConexion();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+                PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Sucursal sucursal = new Sucursal(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getString("ubicacion"),
-                    rs.getString("telefono")
-                );
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("ubicacion"),
+                        rs.getString("telefono"));
                 return Optional.of(sucursal);
             }
             return Optional.empty();
@@ -53,16 +52,15 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
     public Optional<Sucursal> encontrarPorNombre(String nombre) throws SQLException {
         String query = "SELECT * FROM sucursal WHERE nombre = ?";
         try (Connection conn = ConexionBD.getConexion();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+                PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Sucursal sucursal = new Sucursal(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getString("ubicacion"),
-                    rs.getString("telefono")
-                );
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("ubicacion"),
+                        rs.getString("telefono"));
                 return Optional.of(sucursal);
             }
             return Optional.empty();
@@ -72,23 +70,22 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
     }
 
     @Override
-    public List<Sucursal> obtenerTodo() {
+    public List<Sucursal> obtenerTodo() throws SQLException {
         List<Sucursal> sucursales = new ArrayList<>();
         String query = "SELECT * FROM sucursal";
         try (Connection conn = ConexionBD.getConexion();
-             PreparedStatement ps = conn.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = conn.prepareStatement(query);
+                ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Sucursal sucursal = new Sucursal(
-                    rs.getInt("id"),
-                    rs.getString("nombre"),
-                    rs.getString("ubicacion"),
-                    rs.getString("telefono")
-                );
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("ubicacion"),
+                        rs.getString("telefono"));
                 sucursales.add(sucursal);
             }
         } catch (SQLException e) {
-            System.err.println("Error al obtener sucursales: " + e.getMessage());
+            throw new SQLException("Error al obtener sucursales: " + e.getMessage());
         }
         return sucursales;
     }
@@ -97,7 +94,7 @@ public class SucursalDAO extends BDCRUD<Sucursal, Integer> {
     public void actualizar(Sucursal entidad) throws SQLException {
         String query = "UPDATE sucursal SET nombre = ?, ubicacion = ?, telefono = ? WHERE id = ?";
         try (Connection conn = ConexionBD.getConexion();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+                PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, entidad.getNombre());
             ps.setString(2, entidad.getUbicacion());
             ps.setString(3, entidad.getTelefono());

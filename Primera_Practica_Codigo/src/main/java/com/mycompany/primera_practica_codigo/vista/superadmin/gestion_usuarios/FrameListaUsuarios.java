@@ -2,64 +2,68 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.primera_practica_codigo.vista.superadmin.gestionSucursales;
-
-import com.mycompany.primera_practica_codigo.modelo.dao.SucursalDAO;
-import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
-import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
-import com.mycompany.primera_practica_codigo.vista.superadmin.FrameInicioSuperAdministrador;
+package com.mycompany.primera_practica_codigo.vista.superadmin.gestion_usuarios;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
+
+import com.mycompany.primera_practica_codigo.modelo.dao.UsuarioDAO;
+import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
+import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
+import com.mycompany.primera_practica_codigo.vista.superadmin.FrameInicioSuperAdministrador;
 
 /**
  *
  * @author Matul
  */
-public class FrameListaSucursales extends javax.swing.JFrame {
+public class FrameListaUsuarios extends javax.swing.JFrame {
 
         /**
-         * Creates new form FrameListaSucursales
+         * Creates new form FrameListaUsuarios
          */
-        public FrameListaSucursales() {
+        public FrameListaUsuarios() {
                 initComponents();
                 setLocationRelativeTo(null);
-                mostrarSucursales();
+                mostrarUsuarios();
         }
 
-        private void mostrarSucursales() {
-                SucursalDAO sucursalDAO = new SucursalDAO();
-                List<Sucursal> sucursales = null;
+        private void mostrarUsuarios() {
+                UsuarioDAO usuarioDAO = new UsuarioDAO();
+                List<Usuario> usuarios = null;
+
                 try {
-                        sucursales = sucursalDAO.obtenerTodo();
+                        usuarios = usuarioDAO.obtenerTodo();
                 } catch (SQLException e) {
-                        String mensajeError = "Error al cargar sucursales: " + e.getMessage();
-                        MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+                        String errorMessage = "Error al obtener los usuarios: " + e.getMessage();
+                        MensajeErrorFrame errorFrame = new MensajeErrorFrame(null, true, errorMessage);
                 }
 
                 DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-                modelo.setRowCount(0); // Limpiar tabla
+                modelo.setRowCount(0);
 
-                if (sucursales == null || sucursales.isEmpty()) {
-                        // Eliminar la tabla y mostrar un mensaje en un label
-                        jPanelListaSucursales.removeAll();
-                        javax.swing.JLabel mensaje = new javax.swing.JLabel("No hay sucursales registradas.");
+                if (usuarios == null || usuarios.isEmpty()) {
+                        jPanelListaUsuarios.removeAll();
+                        javax.swing.JLabel mensaje = new javax.swing.JLabel("No hay usuarios registrados.");
                         mensaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                        jPanelListaSucursales.setLayout(new java.awt.BorderLayout());
-                        jPanelListaSucursales.add(mensaje, java.awt.BorderLayout.CENTER);
-                        jPanelListaSucursales.revalidate();
-                        jPanelListaSucursales.repaint();
+                        jPanelListaUsuarios.setLayout(new java.awt.BorderLayout());
+                        jPanelListaUsuarios.add(mensaje, java.awt.BorderLayout.CENTER);
+                        jPanelListaUsuarios.revalidate();
+                        jPanelListaUsuarios.repaint();
                 } else {
-                        for (Sucursal sucursal : sucursales) {
-                                modelo.addRow(new Object[] {
-                                                sucursal.getId(),
-                                                sucursal.getNombre(),
-                                                sucursal.getTelefono(),
-                                                sucursal.getUbicacion()
-                                });
+                        for (Usuario usuario : usuarios) {
+                                modelo.addRow(
+                                                new Object[] {
+                                                                usuario.getIdUsuario(),
+                                                                usuario.getNombreUsuario(),
+                                                                usuario.getSucursal() != null
+                                                                                ? usuario.getSucursal().getNombre()
+                                                                                : "Sin sucursal",
+                                                                usuario.getRol().toString() });
                         }
                 }
+
         }
 
         /**
@@ -69,14 +73,14 @@ public class FrameListaSucursales extends javax.swing.JFrame {
          */
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
+        // <editor-fold defaultstate="collapsed" desc="Generated
         // Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
-                jPanel2 = new javax.swing.JPanel();
                 jPanel1 = new javax.swing.JPanel();
                 jPanelTitle = new javax.swing.JPanel();
                 jLabelTitle = new javax.swing.JLabel();
-                jPanelListaSucursales = new javax.swing.JPanel();
+                jPanelListaUsuarios = new javax.swing.JPanel();
                 jScrollPane1 = new javax.swing.JScrollPane();
                 jTable1 = new javax.swing.JTable();
                 jPanelRegresar = new javax.swing.JPanel();
@@ -86,26 +90,17 @@ public class FrameListaSucursales extends javax.swing.JFrame {
                 jPanel12 = new javax.swing.JPanel();
                 jPanel18 = new javax.swing.JPanel();
 
-                javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-                jPanel2.setLayout(jPanel2Layout);
-                jPanel2Layout.setHorizontalGroup(
-                                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 100, Short.MAX_VALUE));
-                jPanel2Layout.setVerticalGroup(
-                                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 100, Short.MAX_VALUE));
-
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
                 jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
                 jLabelTitle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-                jLabelTitle.setText("Lista De Sucursales");
+                jLabelTitle.setText("Lista De Usuarios");
                 jPanelTitle.add(jLabelTitle);
 
                 jPanel1.add(jPanelTitle);
 
-                jPanelListaSucursales.setLayout(new java.awt.GridLayout(0, 1, 0, 30));
+                jPanelListaUsuarios.setLayout(new java.awt.GridLayout(0, 1, 0, 30));
 
                 jTable1.setModel(new javax.swing.table.DefaultTableModel(
                                 new Object[][] {
@@ -115,13 +110,13 @@ public class FrameListaSucursales extends javax.swing.JFrame {
                                                 { null, null, null, null }
                                 },
                                 new String[] {
-                                                "#", "Nombre", "Telefono", "Ubicacion"
+                                                "#", "Nombre", "Sucursal", "Rol"
                                 }));
                 jScrollPane1.setViewportView(jTable1);
 
-                jPanelListaSucursales.add(jScrollPane1);
+                jPanelListaUsuarios.add(jScrollPane1);
 
-                jPanel1.add(jPanelListaSucursales);
+                jPanel1.add(jPanelListaUsuarios);
 
                 jPanelRegresar.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -129,10 +124,10 @@ public class FrameListaSucursales extends javax.swing.JFrame {
                 jPanel19.setLayout(jPanel19Layout);
                 jPanel19Layout.setHorizontalGroup(
                                 jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 206, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel19Layout.setVerticalGroup(
                                 jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 49, Short.MAX_VALUE));
+                                                .addGap(0, 48, Short.MAX_VALUE));
 
                 jPanelRegresar.add(jPanel19);
 
@@ -150,7 +145,7 @@ public class FrameListaSucursales extends javax.swing.JFrame {
                 jPanel12.setLayout(jPanel12Layout);
                 jPanel12Layout.setHorizontalGroup(
                                 jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 206, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel12Layout.setVerticalGroup(
                                 jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGap(0, 24, Short.MAX_VALUE));
@@ -163,10 +158,10 @@ public class FrameListaSucursales extends javax.swing.JFrame {
                 jPanel18.setLayout(jPanel18Layout);
                 jPanel18Layout.setHorizontalGroup(
                                 jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 206, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel18Layout.setVerticalGroup(
                                 jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 49, Short.MAX_VALUE));
+                                                .addGap(0, 48, Short.MAX_VALUE));
 
                 jPanelRegresar.add(jPanel18);
 
@@ -177,20 +172,20 @@ public class FrameListaSucursales extends javax.swing.JFrame {
                 layout.setHorizontalGroup(
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 619,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 400,
                                                                 Short.MAX_VALUE));
                 layout.setVerticalGroup(
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 154,
+                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 146,
                                                                 Short.MAX_VALUE));
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
         private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRegresarActionPerformed
+                FrameInicioSuperAdministrador frameInicioSuperAdministrador = new FrameInicioSuperAdministrador();
+                frameInicioSuperAdministrador.setVisible(true);
                 this.dispose();
-                FrameInicioSuperAdministrador frameSuperAdmin = new FrameInicioSuperAdministrador();
-                frameSuperAdmin.setVisible(true);
         }// GEN-LAST:event_jButtonRegresarActionPerformed
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -200,9 +195,8 @@ public class FrameListaSucursales extends javax.swing.JFrame {
         private javax.swing.JPanel jPanel12;
         private javax.swing.JPanel jPanel18;
         private javax.swing.JPanel jPanel19;
-        private javax.swing.JPanel jPanel2;
         private javax.swing.JPanel jPanel20;
-        private javax.swing.JPanel jPanelListaSucursales;
+        private javax.swing.JPanel jPanelListaUsuarios;
         private javax.swing.JPanel jPanelRegresar;
         private javax.swing.JPanel jPanelTitle;
         private javax.swing.JScrollPane jScrollPane1;

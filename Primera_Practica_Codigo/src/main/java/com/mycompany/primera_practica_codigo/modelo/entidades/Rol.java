@@ -1,7 +1,8 @@
 package com.mycompany.primera_practica_codigo.modelo.entidades;
 
-public enum TipoUsuario {
+public enum Rol {
     JUGADOR,
-    ADMINISTRADOR,
+    ADMINISTRADOR_SUCURSAL,
     SUPERADMINISTRADOR
+
 }
