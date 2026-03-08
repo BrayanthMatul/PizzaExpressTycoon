@@ -9,6 +9,8 @@ import java.util.Optional;
 import com.mycompany.primera_practica_codigo.modelo.dao.UsuarioDAO;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Rol;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
+import com.mycompany.primera_practica_codigo.vista.administrador_sucursal.FrameInicioAdministradorSucursal;
+import com.mycompany.primera_practica_codigo.vista.juego.FrameInicioJugador;
 import com.mycompany.primera_practica_codigo.vista.superadmin.FrameInicioSuperAdministrador;
 
 /**
@@ -138,13 +140,20 @@ public class FrameLogin extends javax.swing.JFrame {
                 try {
                         Optional<Usuario> usuario = usuarioDAO.encontrarPorNombre(usuarioNombre);
                         if (usuario.isPresent() && usuario.get().getPassword().equals(password)) {
+
+                                Usuario usuarioLogeado = usuario.get();
                                 // Credenciales válidas, abrir la ventana principal
                                 if (usuario.get().getRol() == Rol.JUGADOR) {
-                                        // Abrir ventana para jugador
-                                        System.out.println("Acceso concedido para jugador");
+                                        FrameInicioJugador frameInicioJugador = new FrameInicioJugador(usuarioLogeado);
+                                        frameInicioJugador.setVisible(true);
+                                        this.dispose();
                                 } else if (usuario.get().getRol() == Rol.ADMINISTRADOR_SUCURSAL) {
-                                        // Abrir ventana para administrador de sucursal
-                                        System.out.println("Acceso concedido para administrador de sucursal");
+                                        FrameInicioAdministradorSucursal adminSucursal = new FrameInicioAdministradorSucursal(
+                                                        usuarioLogeado);
+
+                                        adminSucursal.setVisible(true);
+                                        this.dispose();
+
                                 } else if (usuario.get().getRol() == Rol.SUPERADMINISTRADOR) {
                                         FrameInicioSuperAdministrador frame = new FrameInicioSuperAdministrador();
                                         frame.setVisible(true);

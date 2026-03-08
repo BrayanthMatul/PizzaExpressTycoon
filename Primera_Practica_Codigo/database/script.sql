@@ -37,3 +37,11 @@ CREATE TABLE usuario (
 
 INSERT INTO usuario (nombre_usuario, password, rol_id, sucursal_id) 
 VALUES ('admin', '12345', 3, NULL);
+
+CREATE TABLE producto (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    sucursal_id INT NOT NULL,
+    FOREIGN KEY (sucursal_id) REFERENCES sucursal(id) ON DELETE CASCADE
+);

@@ -1,27 +1,57 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package com.mycompany.primera_practica_codigo.vista.juego;
+package com.mycompany.primera_practica_codigo.vista.administrador_sucursal.productos;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+import com.mycompany.primera_practica_codigo.modelo.dao.ProductoDAO;
+import com.mycompany.primera_practica_codigo.modelo.entidades.Producto;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
-import com.mycompany.primera_practica_codigo.vista.FrameLogin;
-import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
+import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
 
 /**
  *
  * @author Matul
  */
-public class FrameInicioJugador extends javax.swing.JFrame {
+public class FrameBuscadorProducto extends javax.swing.JDialog {
 
         private Usuario usuario;
+        private List<Producto> productos;
+        private JFrame frameAnterior;
 
         /**
-         * Creates new form FrameInicioJugador
+         * Creates new form FrameBuscadorProducto
          */
-        public FrameInicioJugador(Usuario usuario) {
+        public FrameBuscadorProducto(java.awt.Frame parent, JFrame frameAnterior, boolean modal, Usuario usuario) {
+                super(parent, modal);
                 initComponents();
+                setLocationRelativeTo(null);
+                setTitle("Buscador de Productos");
                 this.usuario = usuario;
+                this.frameAnterior = frameAnterior;
+                cargarProductos();
+        }
+
+        private void cargarProductos() {
+                int idSucursal = usuario.getSucursal().getId(); // Obtener el ID de la sucursal del usuario
+                Producto producto = new Producto();
+                ProductoDAO productoDAO = new ProductoDAO();
+                productos = null;
+                try {
+                        productos = productoDAO.obtenerTodoPorSucursal(idSucursal);
+                } catch (SQLException e) {
+                        String mensajeError = "Error al cargar los productos: " + e.getMessage();
+                        MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+                }
+                jComboBoxProductos.removeAllItems();
+                for (Producto p : productos) {
+                        jComboBoxProductos.addItem(p.getNombre());
+                }
         }
 
         /**
@@ -40,23 +70,24 @@ public class FrameInicioJugador extends javax.swing.JFrame {
                 jPanel3 = new javax.swing.JPanel();
                 jPanel4 = new javax.swing.JPanel();
                 jPanel5 = new javax.swing.JPanel();
-                jButtonIniciarPartida = new javax.swing.JButton();
-                jButtonMisEstadisticas = new javax.swing.JButton();
+                jPanel9 = new javax.swing.JPanel();
+                jComboBoxProductos = new javax.swing.JComboBox<>();
+                jButtonEditar = new javax.swing.JButton();
                 jPanel6 = new javax.swing.JPanel();
                 jPanel17 = new javax.swing.JPanel();
                 jPanel19 = new javax.swing.JPanel();
                 jPanel20 = new javax.swing.JPanel();
                 jPanel7 = new javax.swing.JPanel();
-                jButtonCerrarSesion = new javax.swing.JButton();
+                jButtonRegresar = new javax.swing.JButton();
                 jPanel8 = new javax.swing.JPanel();
                 jPanel18 = new javax.swing.JPanel();
 
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
                 jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
                 jLabelTitle.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-                jLabelTitle.setText("Pizza Express Tycoon");
+                jLabelTitle.setText("Seleccione el producto que desea editar");
                 jPanel2.add(jLabelTitle);
 
                 jPanel1.add(jPanel2);
@@ -67,30 +98,31 @@ public class FrameInicioJugador extends javax.swing.JFrame {
                 jPanel4.setLayout(jPanel4Layout);
                 jPanel4Layout.setHorizontalGroup(
                                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 226, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel4Layout.setVerticalGroup(
                                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 108, Short.MAX_VALUE));
+                                                .addGap(0, 82, Short.MAX_VALUE));
 
                 jPanel3.add(jPanel4);
 
                 jPanel5.setLayout(new java.awt.GridLayout(0, 1, 0, 30));
 
-                jButtonIniciarPartida.setText("Iniciar Partida");
-                jButtonIniciarPartida.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jButtonIniciarPartidaActionPerformed(evt);
-                        }
-                });
-                jPanel5.add(jButtonIniciarPartida);
+                jPanel9.setLayout(new java.awt.GridLayout(0, 1));
 
-                jButtonMisEstadisticas.setText("Mis estadisticas");
-                jButtonMisEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+                jComboBoxProductos.setModel(
+                                new javax.swing.DefaultComboBoxModel<>(
+                                                new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                jPanel9.add(jComboBoxProductos);
+
+                jPanel5.add(jPanel9);
+
+                jButtonEditar.setText("Editar");
+                jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jButtonMisEstadisticasActionPerformed(evt);
+                                jButtonEditarActionPerformed(evt);
                         }
                 });
-                jPanel5.add(jButtonMisEstadisticas);
+                jPanel5.add(jButtonEditar);
 
                 jPanel3.add(jPanel5);
 
@@ -98,10 +130,10 @@ public class FrameInicioJugador extends javax.swing.JFrame {
                 jPanel6.setLayout(jPanel6Layout);
                 jPanel6Layout.setHorizontalGroup(
                                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 226, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel6Layout.setVerticalGroup(
                                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 108, Short.MAX_VALUE));
+                                                .addGap(0, 82, Short.MAX_VALUE));
 
                 jPanel3.add(jPanel6);
 
@@ -113,10 +145,10 @@ public class FrameInicioJugador extends javax.swing.JFrame {
                 jPanel19.setLayout(jPanel19Layout);
                 jPanel19Layout.setHorizontalGroup(
                                 jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 226, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel19Layout.setVerticalGroup(
                                 jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 102, Short.MAX_VALUE));
+                                                .addGap(0, 72, Short.MAX_VALUE));
 
                 jPanel17.add(jPanel19);
 
@@ -126,29 +158,29 @@ public class FrameInicioJugador extends javax.swing.JFrame {
                 jPanel7.setLayout(jPanel7Layout);
                 jPanel7Layout.setHorizontalGroup(
                                 jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 226, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel7Layout.setVerticalGroup(
                                 jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 34, Short.MAX_VALUE));
+                                                .addGap(0, 24, Short.MAX_VALUE));
 
                 jPanel20.add(jPanel7);
 
-                jButtonCerrarSesion.setText("Cerrar Sesion");
-                jButtonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+                jButtonRegresar.setText("Regresar");
+                jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jButtonCerrarSesionActionPerformed(evt);
+                                jButtonRegresarActionPerformed(evt);
                         }
                 });
-                jPanel20.add(jButtonCerrarSesion);
+                jPanel20.add(jButtonRegresar);
 
                 javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
                 jPanel8.setLayout(jPanel8Layout);
                 jPanel8Layout.setHorizontalGroup(
                                 jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 226, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel8Layout.setVerticalGroup(
                                 jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 34, Short.MAX_VALUE));
+                                                .addGap(0, 24, Short.MAX_VALUE));
 
                 jPanel20.add(jPanel8);
 
@@ -158,10 +190,10 @@ public class FrameInicioJugador extends javax.swing.JFrame {
                 jPanel18.setLayout(jPanel18Layout);
                 jPanel18Layout.setHorizontalGroup(
                                 jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 226, Short.MAX_VALUE));
+                                                .addGap(0, 133, Short.MAX_VALUE));
                 jPanel18Layout.setVerticalGroup(
                                 jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 102, Short.MAX_VALUE));
+                                                .addGap(0, 72, Short.MAX_VALUE));
 
                 jPanel17.add(jPanel18);
 
@@ -172,36 +204,40 @@ public class FrameInicioJugador extends javax.swing.JFrame {
                 layout.setHorizontalGroup(
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 679,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 400,
                                                                 Short.MAX_VALUE));
                 layout.setVerticalGroup(
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 244,
+                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 188,
                                                                 Short.MAX_VALUE));
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void jButtonIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonIniciarPartidaActionPerformed
-                FrameJuego frameJuego = new FrameJuego(usuario);
-                frameJuego.setVisible(true);
-                this.dispose();
-        }// GEN-LAST:event_jButtonIniciarPartidaActionPerformed
+        private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonEditarActionPerformed
+                Producto producto = null;
+                String nombreProductoSeleccionado = (String) jComboBoxProductos.getSelectedItem();
+                for (Producto p : productos) {
+                        if (p.getNombre().equals(nombreProductoSeleccionado)) {
+                                producto = p;
+                        }
+                }
 
-        private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCerrarSesionActionPerformed
                 this.dispose();
-                FrameLogin frameLogin = new FrameLogin();
-                frameLogin.setVisible(true);
-        }// GEN-LAST:event_jButtonCerrarSesionActionPerformed
+                frameAnterior.dispose();
+                FrameEditorProducto frameEditorProducto = new FrameEditorProducto(producto, usuario);
+                frameEditorProducto.setVisible(true);
 
-        private void jButtonMisEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonMisEstadisticasActionPerformed
-                // TODO add your handling code here:
-        }// GEN-LAST:event_jButtonMisEstadisticasActionPerformed
+        }// GEN-LAST:event_jButtonEditarActionPerformed
+
+        private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRegresarActionPerformed
+                dispose();
+        }// GEN-LAST:event_jButtonRegresarActionPerformed
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton jButtonCerrarSesion;
-        private javax.swing.JButton jButtonIniciarPartida;
-        private javax.swing.JButton jButtonMisEstadisticas;
+        private javax.swing.JButton jButtonEditar;
+        private javax.swing.JButton jButtonRegresar;
+        private javax.swing.JComboBox<String> jComboBoxProductos;
         private javax.swing.JLabel jLabelTitle;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JPanel jPanel17;
@@ -215,5 +251,6 @@ public class FrameInicioJugador extends javax.swing.JFrame {
         private javax.swing.JPanel jPanel6;
         private javax.swing.JPanel jPanel7;
         private javax.swing.JPanel jPanel8;
+        private javax.swing.JPanel jPanel9;
         // End of variables declaration//GEN-END:variables
 }

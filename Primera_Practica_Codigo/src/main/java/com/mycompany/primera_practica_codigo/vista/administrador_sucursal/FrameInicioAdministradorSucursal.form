@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="502" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="542" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -64,13 +64,13 @@
                 <Property name="text" type="java.lang.String" value="Administrador de sucursal"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="jLabelNombreAdmin">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Nombre Administrador"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="jLabelNombreSucural">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Nombre sucursal"/>
@@ -96,7 +96,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="222" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="220" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -109,40 +109,43 @@
                 <Property name="verticalGap" type="int" value="25"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabelGestionSucursales">
+                <Component class="javax.swing.JLabel" name="jLabelProductos">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Productos"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonCrearNuevaSucursal">
+                <Component class="javax.swing.JButton" name="jButtonNuevoProducto">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nuevo Producto"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCrearNuevaSucursalActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNuevoProductoActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonEditarSucursalExistente">
+                <Component class="javax.swing.JButton" name="jButtonEditarProducto">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Editar producto"/>
+                    <Property name="text" type="java.lang.String" value="Editar Producto"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarSucursalExistenteActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditarProductoActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonListaSucursales">
+                <Component class="javax.swing.JButton" name="jButtonActivarDesactivar">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Activar / Desactivar Producto"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListaSucursalesActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonActivarDesactivarActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="jButtonListaProductos">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Lista de productos"/>
+                    <Property name="text" type="java.lang.String" value="Lista Productos"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListaProductosActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -154,21 +157,27 @@
                 <Property name="verticalGap" type="int" value="25"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel6">
+                <Component class="javax.swing.JLabel" name="jLabelReportes">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Reportes"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonParametrosJuego">
+                <Component class="javax.swing.JButton" name="jButtonExportarRanking">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Exportar ranking de jugadores"/>
+                    <Property name="text" type="java.lang.String" value="Exportar Ranking Jugadores"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExportarRankingActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="jButtonExportarPartidas">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Exportar partidas jugadas"/>
+                    <Property name="text" type="java.lang.String" value="Exportar Partidas Jugadas"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExportarPartidasActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -182,7 +191,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="222" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="220" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -207,7 +216,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="79" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="105" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -226,12 +235,12 @@
                     <Property name="text" type="java.lang.String" value="Estadisticas"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonRegistroUsuario">
+                <Component class="javax.swing.JButton" name="jButtonVerPartidasJugadas">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver partidas jugadas"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegistroUsuarioActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVerPartidasJugadasActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -250,10 +259,13 @@
                     <Property name="text" type="java.lang.String" value="Ranking "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButtonEstadisticasGlobales">
+                <Component class="javax.swing.JButton" name="jButtonRakingJugadores">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Ver ranking jugadores"/>
+                    <Property name="text" type="java.lang.String" value="Ver Ranking Jugadores "/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRakingJugadoresActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -267,7 +279,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="79" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="105" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -291,7 +303,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="88" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -313,14 +325,14 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                 </Container>
                 <Component class="javax.swing.JButton" name="jButtonCerrarSesion">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cerrar sesion"/>
+                    <Property name="text" type="java.lang.String" value="Cerrar Sesion "/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCerrarSesionActionPerformed"/>
@@ -336,7 +348,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -353,7 +365,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="88" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
