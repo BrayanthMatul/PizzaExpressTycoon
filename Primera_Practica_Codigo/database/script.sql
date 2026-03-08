@@ -45,3 +45,19 @@ CREATE TABLE producto (
     sucursal_id INT NOT NULL,
     FOREIGN KEY (sucursal_id) REFERENCES sucursal(id) ON DELETE CASCADE
 );
+
+
+CREATE TABLE configuracion_juego (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    valor INT NOT NULL
+);
+
+INSERT INTO configuracion_juego (nombre, valor) VALUES 
+    ('segundos_por_pedidos_n1', 90),
+    ('segundos_por_pedidos_n2', 60),
+    ('segundos_por_pedidos_n3', 45),
+    ('maximo_pedidos_activos', 5),
+    ('duracion_de_turno', 240),
+    ('puntos_para_subir_nivel2', 100),
+    ('puntos_para_subir_nivel3', 150);

@@ -4,18 +4,28 @@
  */
 package com.mycompany.primera_practica_codigo.vista.juego;
 
+import java.sql.SQLException;
+
+import com.mycompany.primera_practica_codigo.modelo.dao.ConfiguracionJuegoDAO;
+import com.mycompany.primera_practica_codigo.modelo.entidades.ConfiguracionJuego;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
+import com.mycompany.primera_practica_codigo.util.Actualizable;
 import com.mycompany.primera_practica_codigo.util.Temporizable;
 import com.mycompany.primera_practica_codigo.util.Temporizador;
+import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
 
 /**
  *
  * @author Matul
  */
-public class FrameJuego extends javax.swing.JFrame implements Temporizable {
+public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actualizable {
 
     private Temporizador temporizador;
     private Usuario usuario;
+    private ConfiguracionJuego configuracionJuego;
+    private int tiempoPartida;
+    private int segundosInciales;
+    private int minutosIniciales;
 
     /**
      * Creates new form FrameJuego
@@ -23,11 +33,12 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable {
     public FrameJuego(Usuario usuario) {
         initComponents();
         setLocationRelativeTo(null);
-        temporizador = new Temporizador();
+        this.usuario = usuario;
+        configurarDatosIniciales();
+        temporizador = new Temporizador(minutosIniciales, segundosInciales);
         temporizador.setTemporizable(this);
         temporizador.start();
-        this.usuario = usuario;
-        colocarDatosUsuario();
+
     }
 
     @Override
@@ -36,8 +47,42 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable {
         jLabelTiempo.setText(tiempoFormateado);
     }
 
-    private void colocarDatosUsuario() {
+    private void configurarDatosIniciales() {
+        ConfiguracionJuegoDAO configuracionJuegoDAO = new ConfiguracionJuegoDAO();
+        try {
+            configuracionJuego = configuracionJuegoDAO.obtenerConfiguracion();
+        } catch (SQLException e) {
+            String mensajeError = "Error al cargar la configuración del juego: " + e.getMessage();
+            MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+        }
+
         jLabelNombreJugador.setText(usuario.getNombreUsuario());
+        tiempoPartida = configuracionJuego.getDuracionTurno();
+
+        minutosIniciales = tiempoPartida / 60;
+        segundosInciales = tiempoPartida % 60;
+
+        jLabelNivelSiguiente.setText(String.format("Siguiente %d / %d PTS", 0,
+                configuracionJuego.getPuntosParaSubirNivel2()));
+
+        jLabelPuntaje.setText("0 puntos");
+
+        jLabelPedidosTitle.setText("Pedidos (Max: " + configuracionJuego.getMaximoDePedidosActivos() + ")");
+    }
+
+    @Override
+    public void subirNivel(int nivel) {
+        jLabelNivel.setText("Nivel : " + nivel);
+    }
+
+    @Override
+    public void actualizarPuntos(int puntos) {
+        jLabelPuntaje.setText(puntos + " puntos");
+    }
+
+    @Override
+    public void actualizarPuntosParaSubirNivel(int puntosAcumulados, int puntosParaSubirNivel) {
+        jLabelNivelSiguiente.setText(String.format("Siguiente %d / %d PTS", puntosAcumulados, puntosParaSubirNivel));
     }
 
     /**
@@ -47,34 +92,51 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jPanelDatos = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jLabelJugador = new javax.swing.JLabel();
         jLabelNombreJugador = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jLabelNivel = new javax.swing.JLabel();
         jLabelNivelSiguiente = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jLabelPuntajeTitle = new javax.swing.JLabel();
         jLabelPuntaje = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jLabelTiempoTitle = new javax.swing.JLabel();
         jLabelTiempo = new javax.swing.JLabel();
         jPanelEspacio = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelPedidosTitle = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanelPedidos = new javax.swing.JPanel();
         jPanelOpcionesSalida = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
         jPanelDatos.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
 
         jPanel6.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel6.add(jLabel4);
 
         jLabelJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelJugador.setText("Jugador");
@@ -87,30 +149,39 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable {
         jPanelDatos.add(jPanel6);
 
         jPanel7.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel7.add(jLabel5);
 
+        jLabelNivel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNivel.setText("Nivel : 1");
         jPanel7.add(jLabelNivel);
 
+        jLabelNivelSiguiente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNivelSiguiente.setText("Siguiente 10 / 100 EXP");
         jPanel7.add(jLabelNivelSiguiente);
 
         jPanelDatos.add(jPanel7);
 
         jPanel8.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel8.add(jLabel6);
 
+        jLabelPuntajeTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPuntajeTitle.setText("Puntaje");
         jPanel8.add(jLabelPuntajeTitle);
 
+        jLabelPuntaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPuntaje.setText("1253 puntos");
         jPanel8.add(jLabelPuntaje);
 
         jPanelDatos.add(jPanel8);
 
         jPanel9.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel9.add(jLabel7);
 
+        jLabelTiempoTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTiempoTitle.setText("Tiempo restante de turno");
         jPanel9.add(jLabelTiempoTitle);
 
+        jLabelTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTiempo.setText("03 : 04 ");
         jPanel9.add(jLabelTiempo);
 
@@ -118,14 +189,17 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable {
 
         jPanel1.add(jPanelDatos);
 
-        javax.swing.GroupLayout jPanelEspacioLayout = new javax.swing.GroupLayout(jPanelEspacio);
-        jPanelEspacio.setLayout(jPanelEspacioLayout);
-        jPanelEspacioLayout.setHorizontalGroup(
-                jPanelEspacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 908, Short.MAX_VALUE));
-        jPanelEspacioLayout.setVerticalGroup(
-                jPanelEspacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 120, Short.MAX_VALUE));
+        jPanelEspacio.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel2.add(jLabel3);
+
+        jLabelPedidosTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelPedidosTitle.setText("Pedidos");
+        jPanel2.add(jLabelPedidosTitle);
+        jPanel2.add(jLabel2);
+
+        jPanelEspacio.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanelEspacio);
 
@@ -133,21 +207,25 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable {
         jPanelPedidos.setLayout(jPanelPedidosLayout);
         jPanelPedidosLayout.setHorizontalGroup(
                 jPanelPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 908, Short.MAX_VALUE));
+                        .addGap(0, 771, Short.MAX_VALUE));
         jPanelPedidosLayout.setVerticalGroup(
                 jPanelPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 120, Short.MAX_VALUE));
+                        .addGap(0, 78, Short.MAX_VALUE));
 
         jPanel1.add(jPanelPedidos);
 
-        javax.swing.GroupLayout jPanelOpcionesSalidaLayout = new javax.swing.GroupLayout(jPanelOpcionesSalida);
-        jPanelOpcionesSalida.setLayout(jPanelOpcionesSalidaLayout);
-        jPanelOpcionesSalidaLayout.setHorizontalGroup(
-                jPanelOpcionesSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 908, Short.MAX_VALUE));
-        jPanelOpcionesSalidaLayout.setVerticalGroup(
-                jPanelOpcionesSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 120, Short.MAX_VALUE));
+        jPanelOpcionesSalida.setLayout(new java.awt.GridLayout(0, 1));
+        jPanelOpcionesSalida.add(jLabel10);
+
+        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel3.add(jLabel8);
+
+        jButton1.setText("Regresar");
+        jPanel3.add(jButton1);
+        jPanel3.add(jLabel9);
+
+        jPanelOpcionesSalida.add(jPanel3);
+        jPanelOpcionesSalida.add(jLabel11);
 
         jPanel1.add(jPanelOpcionesSalida);
 
@@ -161,22 +239,35 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable {
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE));
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelJugador;
     private javax.swing.JLabel jLabelNivel;
     private javax.swing.JLabel jLabelNivelSiguiente;
     private javax.swing.JLabel jLabelNombreJugador;
+    private javax.swing.JLabel jLabelPedidosTitle;
     private javax.swing.JLabel jLabelPuntaje;
     private javax.swing.JLabel jLabelPuntajeTitle;
     private javax.swing.JLabel jLabelTiempo;
     private javax.swing.JLabel jLabelTiempoTitle;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;

@@ -15,14 +15,10 @@ public class Temporizador extends Thread {
     private boolean tiempoAgotado;
     private Temporizable temporizable;
 
-    public Temporizador() {
-        definirTiempo();
+    public Temporizador(int minutos, int segundos) {
+        this.minutos = minutos;
+        this.segundos = segundos;
         this.tiempoAgotado = false;
-    }
-
-    private void definirTiempo() {
-        this.minutos = 4;
-        this.segundos = 0;
     }
 
     public int getSegundos() {

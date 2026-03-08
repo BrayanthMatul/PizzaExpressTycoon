@@ -260,6 +260,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Parametros del juego"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonParametrosJuegoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jPanel6">
 

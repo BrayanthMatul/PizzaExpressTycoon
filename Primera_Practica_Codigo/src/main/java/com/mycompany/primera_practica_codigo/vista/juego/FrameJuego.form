@@ -28,16 +28,15 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="1" pref="343" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="1"/>
-        <Property name="rows" type="int" value="0"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+        <Property name="axis" type="int" value="1"/>
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="jPanelDatos">
@@ -55,6 +54,8 @@
                 <Property name="rows" type="int" value="0"/>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel4">
+                </Component>
                 <Component class="javax.swing.JLabel" name="jLabelJugador">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
@@ -76,13 +77,17 @@
                 <Property name="rows" type="int" value="0"/>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                </Component>
                 <Component class="javax.swing.JLabel" name="jLabelNivel">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Nivel : 1"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelNivelSiguiente">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Siguiente 10 / 100 EXP"/>
                   </Properties>
                 </Component>
@@ -95,13 +100,17 @@
                 <Property name="rows" type="int" value="0"/>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel6">
+                </Component>
                 <Component class="javax.swing.JLabel" name="jLabelPuntajeTitle">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Puntaje"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelPuntaje">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="1253 puntos"/>
                   </Properties>
                 </Component>
@@ -114,13 +123,17 @@
                 <Property name="rows" type="int" value="0"/>
               </Layout>
               <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel7">
+                </Component>
                 <Component class="javax.swing.JLabel" name="jLabelTiempoTitle">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Tiempo restante de turno"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelTiempo">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="03 : 04 "/>
                   </Properties>
                 </Component>
@@ -130,48 +143,79 @@
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelEspacio">
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="908" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="jPanel2">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="1"/>
+                <Property name="rows" type="int" value="0"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelPedidosTitle">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="Pedidos"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelPedidos">
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="908" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="771" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="78" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanelOpcionesSalida">
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="908" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="120" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="1"/>
+            <Property name="rows" type="int" value="0"/>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel10">
+            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel3">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="0"/>
+                <Property name="rows" type="int" value="1"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="jLabel8">
+                </Component>
+                <Component class="javax.swing.JButton" name="jButton1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Regresar"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel9">
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="jLabel11">
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
