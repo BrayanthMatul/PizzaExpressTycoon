@@ -101,7 +101,11 @@ public class Partida {
         pedidosCompletados++;
         puntosAcumuladosNivelActual += PUNTOS_POR_PEDIDO_ENTREGADO;
         actualizable.actualizarPuntos(puntajeTotal);
-        actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel2);
+        if (nivel == 1) {
+            actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel2);
+        } else if (nivel == 2) {
+            actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel3);
+        }
         verificarSubirNivel();
     }
 
@@ -113,7 +117,6 @@ public class Partida {
         }
         pedidosNoEntregados++;
         actualizable.actualizarPuntos(puntajeTotal);
-        actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel2);
     }
 
     public void restarPuntosPorCancelado() {
@@ -124,7 +127,6 @@ public class Partida {
         }
         pedidosCancelados++;
         actualizable.actualizarPuntos(puntajeTotal);
-        actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel2);
     }
 
     private void verificarSubirNivel() {
@@ -140,6 +142,7 @@ public class Partida {
         this.nivel++;
         actualizable.subirNivel(nivel);
         if (nivel == 2) {
+            System.out.println("puntos para subir nivel 3: " + puntosParaSubirNivel3);
             actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel3);
         } else if (nivel == 3) {
             actualizable.ocultarPuntosParaSubirNivel();
