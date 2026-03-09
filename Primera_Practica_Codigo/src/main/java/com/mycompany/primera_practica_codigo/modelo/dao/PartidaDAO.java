@@ -2,6 +2,7 @@ package com.mycompany.primera_practica_codigo.modelo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
 import com.mycompany.primera_practica_codigo.util.ConexionBD;
+import com.mysql.cj.protocol.Resultset;
 
 /**
  *
@@ -51,6 +53,21 @@ public class PartidaDAO {
 
         } catch (SQLException e) {
             throw new SQLException("Error al insertar partida: " + e.getMessage());
+        }
+    }
+
+    public int obtenerIdUltimaPartidaAgregada() throws SQLException {
+        String query = "SELECT MAX(id) AS idPartida FROM partida";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("idPartida");
+            } else {
+                throw new SQLException("No se pudo obtener el ID de la última partida agregada.");
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener el ID de la última partida agregada: " + e.getMessage());
         }
     }
 

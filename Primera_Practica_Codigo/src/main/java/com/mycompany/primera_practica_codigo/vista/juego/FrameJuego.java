@@ -5,8 +5,6 @@
 package com.mycompany.primera_practica_codigo.vista.juego;
 
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.sql.SQLException;
 
 import javax.swing.JPanel;
@@ -53,20 +51,19 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
         String tiempoFormateado = String.format("%02d : %02d", minutos, segundos);
         jLabelTiempo.setText(tiempoFormateado);
         if (temporizador.isTiempoAgotado()) {
+            pararTemporizadorPedidos();
             partida.setPartidaActiva(false);
             jLabelTiempo.setText("Tiempo Agotado");
+            this.dispose();
+            FrameFinalPartida frameFinalPartida = new FrameFinalPartida(partida);
+            frameFinalPartida.setVisible(true);
 
-            String mensajeError = "¡Tiempo agotado! La partida ha terminado.";
-            MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(this, true, mensajeError);
             try {
                 partida.GuardarDatosPartida();
             } catch (SQLException e) {
                 String mensajeErrorGuardar = "Error al guardar los datos de la partida: " + e.getMessage();
                 MensajeErrorFrame mensajeErrorGuardarFrame = new MensajeErrorFrame(this, true, mensajeErrorGuardar);
             }
-            this.dispose();
-            FrameInicioJugador frameInicioJugador = new FrameInicioJugador(usuario);
-            frameInicioJugador.setVisible(true);
         }
     }
 
@@ -189,6 +186,15 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
     @Override
     public void ocultarPuntosParaSubirNivel() {
         jLabelNivelSiguiente.setText("Nivel maximo alcanzado");
+    }
+
+    private void pararTemporizadorPedidos() {
+        for (Component componente : jPanelPedidos.getComponents()) {
+            if (componente instanceof JPanelPedido) {
+                ((JPanelPedido) componente).detenerTemporizador();
+                ;
+            }
+        }
     }
 
     /**

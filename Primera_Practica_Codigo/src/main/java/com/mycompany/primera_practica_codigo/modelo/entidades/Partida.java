@@ -2,16 +2,17 @@ package com.mycompany.primera_practica_codigo.modelo.entidades;
 
 import java.sql.Timestamp;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.mycompany.primera_practica_codigo.modelo.dao.ConfiguracionJuegoDAO;
-import com.mycompany.primera_practica_codigo.modelo.dao.PartidaDAO;
 import com.mycompany.primera_practica_codigo.modelo.dao.ProductoDAO;
 import com.mycompany.primera_practica_codigo.util.Actualizable;
 import com.mycompany.primera_practica_codigo.util.GeneradorPedidos;
+import com.mycompany.primera_practica_codigo.util.GuardadorDatosPartida;
 import com.mycompany.primera_practica_codigo.vista.juego.FrameJuego;
 
 public class Partida {
@@ -19,6 +20,7 @@ public class Partida {
     private final int PUNTOS_POR_PEDIDO_ENTREGADO = 20;
     private final int PUNTOS_POR_PEDIDO_NO_ENTREGADO = 15;
     private final int PUNTOS_POR_PEDIDO_CANCELADO = 10;
+    private final int PUNTOS_EXTRAS_POR_EFICIENCIA = 10;
 
     private int idPartida;
 
@@ -47,6 +49,7 @@ public class Partida {
     private List<Producto> productosActivos;
     private AtomicInteger pedidosActivos;
     private GeneradorPedidos generadorPedidos;
+    private List<Pedido> pedidos;
     private final Lock lockPedidos = new ReentrantLock();
 
     public Partida(Usuario jugador) {
@@ -62,6 +65,19 @@ public class Partida {
         this.pedidosActivos = new AtomicInteger(0);
         this.frameJuego = new FrameJuego(jugador, this);
         actualizable = frameJuego;
+        this.pedidos = new ArrayList<>();
+    }
+
+    public int getIdPartida() {
+        return idPartida;
+    }
+
+    public void setIdPartida(int idPartida) {
+        this.idPartida = idPartida;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
     public int getPuntajeTotal() {
@@ -134,8 +150,12 @@ public class Partida {
         generadorPedidos.start();
     }
 
-    public void agregarPuntos() {
+    public void agregarPuntos(boolean esEficiente) {
         puntajeTotal += PUNTOS_POR_PEDIDO_ENTREGADO;
+        if (esEficiente) {
+            puntajeTotal += PUNTOS_EXTRAS_POR_EFICIENCIA;
+            puntosAcumuladosNivelActual += PUNTOS_EXTRAS_POR_EFICIENCIA;
+        }
         pedidosCompletados++;
         puntosAcumuladosNivelActual += PUNTOS_POR_PEDIDO_ENTREGADO;
         actualizable.actualizarPuntos(puntajeTotal);
@@ -187,10 +207,12 @@ public class Partida {
         }
     }
 
-    public void eliminarPedido(int numeroPedido, FormaEliminacion formaEliminacion) {
+    public void eliminarPedido(FormaEliminacion formaEliminacion, Pedido pedido) {
         lockPedidos.lock();
         try {
             int pedidosActuales = pedidosActivos.get();
+            int numeroPedido = pedido.getNumeroPedido();
+            boolean esEficiente = pedido.esRapido();
 
             // No decrementar si ya está en 0 o menos
             if (pedidosActuales <= 0) {
@@ -199,13 +221,26 @@ public class Partida {
             pedidosActivos.decrementAndGet();
 
             actualizable.eliminarPedido(numeroPedido);
+            DetallePedido detalle = null;
+            int puntajePorPedido = 0;
 
             if (formaEliminacion == FormaEliminacion.ENTREGADO) {
-                agregarPuntos();
+                agregarPuntos(esEficiente);
+                puntajePorPedido = PUNTOS_POR_PEDIDO_ENTREGADO;
+                if (esEficiente) {
+                    puntajePorPedido += PUNTOS_EXTRAS_POR_EFICIENCIA;
+                }
+                pedido.setPuntosObtenidos(puntajePorPedido);
+                pedidos.add(pedido);
+
             } else if (formaEliminacion == FormaEliminacion.NO_ENTREGADO) {
                 restarPuntosPorNoEntregado();
+                pedido.setPuntosObtenidos(-PUNTOS_POR_PEDIDO_NO_ENTREGADO);
+                pedidos.add(pedido);
             } else {
                 restarPuntosPorCancelado();
+                pedido.setPuntosObtenidos(-PUNTOS_POR_PEDIDO_CANCELADO);
+                pedidos.add(pedido);
             }
         } finally {
             lockPedidos.unlock();
@@ -280,8 +315,22 @@ public class Partida {
 
     public void GuardarDatosPartida() throws SQLException {
         generadorPedidos.interrupt();
+
+        int pedidosActivosRestantes = pedidosActivos.get();
+
+        pedidosNoEntregados += pedidosActivosRestantes;
+
+        for (int i = 0; i < pedidosActivosRestantes; i++) {
+            if (puntajeTotal <= PUNTOS_POR_PEDIDO_NO_ENTREGADO) {
+                puntajeTotal = 0;
+            } else {
+                puntajeTotal -= PUNTOS_POR_PEDIDO_NO_ENTREGADO;
+            }
+        }
+
         fechaYHoraFin = new Timestamp(System.currentTimeMillis());
-        PartidaDAO partidaDAO = new PartidaDAO();
-        partidaDAO.guardarPartida(this);
+        GuardadorDatosPartida guardador = new GuardadorDatosPartida(this);
+        guardador.guardarDatosPartida();
     }
+
 }

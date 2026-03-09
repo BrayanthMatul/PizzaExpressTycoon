@@ -21,7 +21,8 @@ public class GeneradorPedidos extends Thread {
                     partida.agregarPedido();
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                break; // Salir del bucle si el hilo es interrumpido
+
             }
         }
     }

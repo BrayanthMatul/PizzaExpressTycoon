@@ -1,37 +1,14 @@
 package com.mycompany.primera_practica_codigo.modelo.entidades;
 
-import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
-import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
-
 public class Jugador extends Usuario {
-    private int idJugador;
     private int partidasJugadas;
     private int nivelMaximoAlcanzado;
     private int puntajeMaximo;
-    private int puntajeAcumulado;
+    private int puntajeTotalAcumulado;
 
     // Constructores
     public Jugador() {
         super();
-    }
-
-    public Jugador(int idJugador, int partidasJugadas, int nivelMaximoAlcanzado,
-            int puntajeMaximo, int puntajeAcumulado) {
-        super();
-        this.idJugador = idJugador;
-        this.partidasJugadas = partidasJugadas;
-        this.nivelMaximoAlcanzado = nivelMaximoAlcanzado;
-        this.puntajeMaximo = puntajeMaximo;
-        this.puntajeAcumulado = puntajeAcumulado;
-    }
-
-    // Getters y Setters
-    public int getIdJugador() {
-        return idJugador;
-    }
-
-    public void setIdJugador(int idJugador) {
-        this.idJugador = idJugador;
     }
 
     public int getPartidasJugadas() {
@@ -58,12 +35,12 @@ public class Jugador extends Usuario {
         this.puntajeMaximo = puntajeMaximo;
     }
 
-    public int getPuntajeAcumulado() {
-        return puntajeAcumulado;
+    public int getPuntajeTotalAcumulado() {
+        return puntajeTotalAcumulado;
     }
 
-    public void setPuntajeAcumulado(int puntajeAcumulado) {
-        this.puntajeAcumulado = puntajeAcumulado;
+    public void setPuntajeTotalAcumulado(int puntajeTotalAcumulado) {
+        this.puntajeTotalAcumulado = puntajeTotalAcumulado;
     }
 
     // Métodos

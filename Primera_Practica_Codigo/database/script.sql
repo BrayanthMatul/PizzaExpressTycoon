@@ -78,3 +78,31 @@ CREATE TABLE partida (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
     FOREIGN KEY (id_sucursal) REFERENCES sucursal(id) ON DELETE CASCADE
 );
+
+CREATE TABLE jugador (
+    id_usuario INT PRIMARY KEY,
+    partidasJugadas INT NOT NULL,
+    nivelMaximoAlcanzado INT NOT NULL,
+    puntajeMaximo INT NOT NULL,
+    puntajeTotalAcumulado INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE
+);
+
+CREATE TABLE detalles_pedido (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_partida INT NOT NULL,
+    nombre_producto VARCHAR(255) NOT NULL,
+    estado_final VARCHAR(50) NOT NULL,
+    puntos_obtenidos INT NOT NULL,
+    FOREIGN KEY (id_partida) REFERENCES partida(id) ON DELETE CASCADE
+);
+
+CREATE TABLE historial_de_estado (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_detalle_pedido INT NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    FOREIGN KEY (id_detalle_pedido) REFERENCES detalles_pedido(id) ON DELETE CASCADE
+);
+
+

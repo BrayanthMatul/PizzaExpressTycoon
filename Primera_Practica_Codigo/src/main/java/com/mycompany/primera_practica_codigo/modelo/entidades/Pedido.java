@@ -1,19 +1,28 @@
 package com.mycompany.primera_practica_codigo.modelo.entidades;
 
+import java.sql.Timestamp;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import com.mycompany.primera_practica_codigo.util.ActualizablePedido;
+import com.mycompany.primera_practica_codigo.util.HistorialEstado;
 
 public class Pedido {
-    private int idPedido;
+
     private String nombreProducto;
-    private Partida partida;
+    private EstadoPedido estadoActual;
+    private int puntosObtenidos;
+
     private int numeroPedido;
+    private Partida partida;
+    private int idPedido;
     private int tiempoLimiteSeg;
     private int tiempoRestanteSeg;
-    private EstadoPedido estadoActual;
     private boolean cancelado;
     private boolean noEntregado;
     private ActualizablePedido actualizablePedido;
+    private List<HistorialEstado> historialEstados;
 
     // Evita que un pedido se elimine multiples veces
     private AtomicBoolean eliminado = new AtomicBoolean(false);
@@ -26,7 +35,11 @@ public class Pedido {
         this.tiempoRestanteSeg = tiempoLimiteSeg;
         this.cancelado = false;
         this.noEntregado = false;
+        this.puntosObtenidos = 0;
         this.estadoActual = EstadoPedido.RECIBIDA;
+        this.historialEstados = new ArrayList<>();
+        generarHistorialEstado();
+
     }
 
     // Getters y Setters
@@ -74,6 +87,18 @@ public class Pedido {
         this.actualizablePedido = actualizablePedido;
     }
 
+    public List<HistorialEstado> getHistorialEstados() {
+        return historialEstados;
+    }
+
+    public void setPuntosObtenidos(int puntosObtenidos) {
+        this.puntosObtenidos = puntosObtenidos;
+    }
+
+    public int getPuntosObtenidos() {
+        return puntosObtenidos;
+    }
+
     public void restarTiempo() {
         // Si ya fue eliminado, ignorar
         if (eliminado.get()) {
@@ -95,17 +120,21 @@ public class Pedido {
         switch (estadoActual) {
             case RECIBIDA:
                 estadoActual = EstadoPedido.PREPARANDO;
+                generarHistorialEstado();
                 break;
             case PREPARANDO:
                 estadoActual = EstadoPedido.EN_HORNO;
                 desactivarBotonCancelar();
+                generarHistorialEstado();
                 break;
             case EN_HORNO:
                 // Solo eliminar si es la primera vez
                 if (eliminado.compareAndSet(false, true)) {
                     estadoActual = EstadoPedido.ENTREGADO;
-                    partida.eliminarPedido(numeroPedido, FormaEliminacion.ENTREGADO);
+
+                    partida.eliminarPedido(FormaEliminacion.ENTREGADO, this);
                 }
+                generarHistorialEstado();
                 return; // No actualizar vista si ya fue eliminado
             default:
                 return;
@@ -126,7 +155,7 @@ public class Pedido {
         if (eliminado.compareAndSet(false, true)) {
             this.cancelado = true;
             this.estadoActual = EstadoPedido.CANCELADO;
-            partida.eliminarPedido(numeroPedido, FormaEliminacion.CANCELADO);
+            partida.eliminarPedido(FormaEliminacion.CANCELADO, this);
         }
     }
 
@@ -135,7 +164,7 @@ public class Pedido {
         if (eliminado.compareAndSet(false, true)) {
             this.noEntregado = true;
             this.estadoActual = EstadoPedido.NO_ENTREGADO;
-            partida.eliminarPedido(numeroPedido, FormaEliminacion.NO_ENTREGADO);
+            partida.eliminarPedido(FormaEliminacion.NO_ENTREGADO, this);
         }
     }
 
@@ -148,7 +177,17 @@ public class Pedido {
     }
 
     public boolean esRapido() {
-        int tiempoRapido = tiempoLimiteSeg / 2;
-        return estadoActual == EstadoPedido.RECIBIDA && tiempoRestanteSeg <= tiempoRapido;
+        if (estadoActual == EstadoPedido.CANCELADO || estadoActual == EstadoPedido.NO_ENTREGADO) {
+            return false;
+        } else {
+            int tiempoMitad = (int) (tiempoLimiteSeg / 2);
+            return tiempoRestanteSeg >= tiempoMitad;
+        }
+    }
+
+    private void generarHistorialEstado() {
+        Timestamp fechaHoraActual = new Timestamp(System.currentTimeMillis());
+        HistorialEstado historial = new HistorialEstado(estadoActual, fechaHoraActual);
+        historialEstados.add(historial);
     }
 }
