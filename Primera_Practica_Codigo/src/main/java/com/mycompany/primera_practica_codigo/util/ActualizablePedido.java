@@ -14,4 +14,6 @@ public interface ActualizablePedido {
 
     public void actualizarEstadoPedido(EstadoPedido nuevoEstado);
 
+    public void desactivarBotonCancelar();
+
 }

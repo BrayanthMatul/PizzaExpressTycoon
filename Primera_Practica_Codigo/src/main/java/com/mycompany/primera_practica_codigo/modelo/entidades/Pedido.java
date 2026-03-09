@@ -1,5 +1,6 @@
 package com.mycompany.primera_practica_codigo.modelo.entidades;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import com.mycompany.primera_practica_codigo.util.ActualizablePedido;
 
 public class Pedido {
@@ -14,6 +15,9 @@ public class Pedido {
     private boolean noEntregado;
     private ActualizablePedido actualizablePedido;
 
+    // Evita que un pedido se elimine multiples veces
+    private AtomicBoolean eliminado = new AtomicBoolean(false);
+
     public Pedido(String nombreProducto, Partida partida, int numeroPedido, int tiempoLimiteSeg) {
         this.nombreProducto = nombreProducto;
         this.partida = partida;
@@ -26,7 +30,6 @@ public class Pedido {
     }
 
     // Getters y Setters
-
     public String getNombreProducto() {
         return nombreProducto;
     }
@@ -72,67 +75,80 @@ public class Pedido {
     }
 
     public void restarTiempo() {
+        // Si ya fue eliminado, ignorar
+        if (eliminado.get()) {
+            return;
+        }
+
         this.tiempoRestanteSeg--;
-        if (this.tiempoRestanteSeg == 0) {
+        if (this.tiempoRestanteSeg <= 0) {
             marcarComoNoEntregado();
         }
     }
 
     public void avanzarEstado() {
+        // Si ya fue eliminado, ignorar
+        if (eliminado.get()) {
+            return;
+        }
+
         switch (estadoActual) {
             case RECIBIDA:
                 estadoActual = EstadoPedido.PREPARANDO;
                 break;
             case PREPARANDO:
                 estadoActual = EstadoPedido.EN_HORNO;
+                desactivarBotonCancelar();
                 break;
             case EN_HORNO:
-                estadoActual = EstadoPedido.ENTREGADO;
-                partida.eliminarPedido(numeroPedido, FormaEliminacion.ENTREGADO);
-                break;
+                // Solo eliminar si es la primera vez
+                if (eliminado.compareAndSet(false, true)) {
+                    estadoActual = EstadoPedido.ENTREGADO;
+                    partida.eliminarPedido(numeroPedido, FormaEliminacion.ENTREGADO);
+                }
+                return; // No actualizar vista si ya fue eliminado
             default:
-                // No hacer nada si ya está entregado o en un estado no válido
                 return;
         }
+
+        // Actualizar vista solo si no fue eliminado
         if (actualizablePedido != null) {
             actualizablePedido.actualizarEstadoPedido(estadoActual);
         }
     }
 
+    private void desactivarBotonCancelar() {
+        actualizablePedido.desactivarBotonCancelar();
+    }
+
     public void cancelar() {
-        this.cancelado = true;
-        this.estadoActual = EstadoPedido.CANCELADO;
-        partida.eliminarPedido(numeroPedido, FormaEliminacion.CANCELADO);
+        // Solo eliminar si es la primera vez
+        if (eliminado.compareAndSet(false, true)) {
+            this.cancelado = true;
+            this.estadoActual = EstadoPedido.CANCELADO;
+            partida.eliminarPedido(numeroPedido, FormaEliminacion.CANCELADO);
+        }
     }
 
     public void marcarComoNoEntregado() {
-        this.noEntregado = true;
-        this.estadoActual = EstadoPedido.NO_ENTREGADO;
-        partida.eliminarPedido(numeroPedido, FormaEliminacion.NO_ENTREGADO);
+        // Solo eliminar si es la primera vez
+        if (eliminado.compareAndSet(false, true)) {
+            this.noEntregado = true;
+            this.estadoActual = EstadoPedido.NO_ENTREGADO;
+            partida.eliminarPedido(numeroPedido, FormaEliminacion.NO_ENTREGADO);
+        }
     }
 
     public boolean puedeCancelar() {
-        if (estadoActual == EstadoPedido.RECIBIDA || estadoActual == EstadoPedido.PREPARANDO) {
-            return true;
-        } else {
-            return false;
-        }
+        return estadoActual == EstadoPedido.RECIBIDA || estadoActual == EstadoPedido.PREPARANDO;
     }
 
     public boolean estaFinalizado() {
-        if (estadoActual == EstadoPedido.ENTREGADO) {
-            return true;
-        } else {
-            return false;
-        }
+        return estadoActual == EstadoPedido.ENTREGADO;
     }
 
     public boolean esRapido() {
         int tiempoRapido = tiempoLimiteSeg / 2;
-        if (estadoActual == EstadoPedido.RECIBIDA && tiempoRestanteSeg <= tiempoRapido) {
-            return true;
-        } else {
-            return false;
-        }
+        return estadoActual == EstadoPedido.RECIBIDA && tiempoRestanteSeg <= tiempoRapido;
     }
 }

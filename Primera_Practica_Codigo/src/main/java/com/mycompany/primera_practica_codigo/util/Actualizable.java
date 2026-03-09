@@ -22,4 +22,6 @@ public interface Actualizable {
 
     void eliminarPedido(int numeroPedido);
 
+    void ocultarPuntosParaSubirNivel();
+
 }

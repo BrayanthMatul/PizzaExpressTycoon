@@ -143,14 +143,12 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
 
     @Override
     public void agregarPedido(Pedido pedido) {
-        // Eliminar todos los paneles vacíos
         eliminarTodosPanelesVacios();
 
         // Agregar el nuevo pedido
         JPanelPedido nuevoPedido = new JPanelPedido(pedido);
         jPanelPedidos.add(nuevoPedido);
 
-        // Volver a agregar paneles vacíos (uno menos que antes)
         panelsVaciosDisponibles--;
         agregarPanelesVacios(panelsVaciosDisponibles);
 
@@ -166,13 +164,10 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
             if (componentes[i] instanceof JPanelPedido) {
                 JPanelPedido panelPedido = (JPanelPedido) componentes[i];
                 if (panelPedido.getNumeroOrden() == numeroPedido) {
-                    // Eliminar el pedido
                     jPanelPedidos.remove(i);
 
-                    // Eliminar todos los paneles vacíos
                     eliminarTodosPanelesVacios();
 
-                    // Volver a agregar paneles vacíos (uno más que antes)
                     panelsVaciosDisponibles++;
                     agregarPanelesVacios(panelsVaciosDisponibles);
 
@@ -183,6 +178,11 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
 
         jPanelPedidos.revalidate();
         jPanelPedidos.repaint();
+    }
+
+    @Override
+    public void ocultarPuntosParaSubirNivel() {
+        jLabelNivelSiguiente.setText("Nivel maximo alcanzado");
     }
 
     /**

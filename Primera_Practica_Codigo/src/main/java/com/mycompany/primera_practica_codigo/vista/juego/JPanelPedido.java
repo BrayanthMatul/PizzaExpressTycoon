@@ -90,6 +90,11 @@ public class JPanelPedido extends javax.swing.JPanel implements Temporizable, Ac
         }
     }
 
+    @Override
+    public void desactivarBotonCancelar() {
+        jButtonCancelar.setEnabled(false);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

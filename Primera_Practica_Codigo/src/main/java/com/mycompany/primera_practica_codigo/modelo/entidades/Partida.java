@@ -4,6 +4,8 @@ import java.security.Timestamp;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import com.mycompany.primera_practica_codigo.modelo.dao.ConfiguracionJuegoDAO;
 import com.mycompany.primera_practica_codigo.modelo.dao.ProductoDAO;
@@ -41,9 +43,9 @@ public class Partida {
     private Actualizable actualizable;
     private boolean partidaActiva;
     private List<Producto> productosActivos;
-    private int segundosPorPedidoActual;
     private AtomicInteger pedidosActivos;
     private GeneradorPedidos generadorPedidos;
+    private final Lock lockPedidos = new ReentrantLock();
 
     public Partida(Usuario jugador) {
         this.jugador = jugador;
@@ -100,6 +102,7 @@ public class Partida {
         puntosAcumuladosNivelActual += PUNTOS_POR_PEDIDO_ENTREGADO;
         actualizable.actualizarPuntos(puntajeTotal);
         actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel2);
+        verificarSubirNivel();
     }
 
     public void restarPuntosPorNoEntregado() {
@@ -124,31 +127,64 @@ public class Partida {
         actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel2);
     }
 
-    public void incrementarNivel() {
+    private void verificarSubirNivel() {
+        if (nivel == 1 && puntosAcumuladosNivelActual >= puntosParaSubirNivel2) {
+            incrementarNivel();
+        } else if (nivel == 2 && puntosAcumuladosNivelActual >= puntosParaSubirNivel3) {
+            incrementarNivel();
+        }
+    }
+
+    private void incrementarNivel() {
         this.puntosAcumuladosNivelActual = 0;
         this.nivel++;
         actualizable.subirNivel(nivel);
+        if (nivel == 2) {
+            actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel3);
+        } else if (nivel == 3) {
+            actualizable.ocultarPuntosParaSubirNivel();
+        }
     }
 
     public void eliminarPedido(int numeroPedido, FormaEliminacion formaEliminacion) {
-        actualizable.eliminarPedido(numeroPedido);
-        if (formaEliminacion == FormaEliminacion.ENTREGADO) {
-            agregarPuntos();
-        } else if (formaEliminacion == FormaEliminacion.NO_ENTREGADO) {
-            restarPuntosPorNoEntregado();
-        } else {
-            restarPuntosPorCancelado();
-        }
+        lockPedidos.lock();
+        try {
+            int pedidosActuales = pedidosActivos.get();
 
-        pedidosActivos.decrementAndGet();
+            // No decrementar si ya está en 0 o menos
+            if (pedidosActuales <= 0) {
+                return; // Salir sin hacer nada
+            }
+            pedidosActivos.decrementAndGet();
+
+            actualizable.eliminarPedido(numeroPedido);
+
+            if (formaEliminacion == FormaEliminacion.ENTREGADO) {
+                agregarPuntos();
+            } else if (formaEliminacion == FormaEliminacion.NO_ENTREGADO) {
+                restarPuntosPorNoEntregado();
+            } else {
+                restarPuntosPorCancelado();
+            }
+        } finally {
+            lockPedidos.unlock();
+        }
     }
 
     public void agregarPedido() {
-        if (partidaActiva && maximoPedidosActivos > pedidosActivos.get()) {
-            contadorPedidos++;
-            Pedido nuevoPedido = crearPedido();
-            actualizable.agregarPedido(nuevoPedido);
-            pedidosActivos.incrementAndGet();
+        lockPedidos.lock();
+        try {
+            int pedidosActuales = pedidosActivos.get();
+
+            if (partidaActiva && pedidosActuales < maximoPedidosActivos) {
+                contadorPedidos++;
+                Pedido nuevoPedido = crearPedido();
+                pedidosActivos.incrementAndGet();
+
+                actualizable.agregarPedido(nuevoPedido);
+            }
+        } finally {
+            lockPedidos.unlock();
         }
     }
 
