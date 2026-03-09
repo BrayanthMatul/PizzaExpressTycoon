@@ -4,6 +4,7 @@
  */
 package com.mycompany.primera_practica_codigo.vista.juego;
 
+import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
 import com.mycompany.primera_practica_codigo.vista.FrameLogin;
 import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
@@ -21,7 +22,9 @@ public class FrameInicioJugador extends javax.swing.JFrame {
          */
         public FrameInicioJugador(Usuario usuario) {
                 initComponents();
+                setLocationRelativeTo(null);
                 this.usuario = usuario;
+                
         }
 
         /**
@@ -183,8 +186,9 @@ public class FrameInicioJugador extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
         private void jButtonIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonIniciarPartidaActionPerformed
-                FrameJuego frameJuego = new FrameJuego(usuario);
-                frameJuego.setVisible(true);
+                Partida partida = new Partida(usuario);
+                partida.iniciarPartida();
+
                 this.dispose();
         }// GEN-LAST:event_jButtonIniciarPartidaActionPerformed
 

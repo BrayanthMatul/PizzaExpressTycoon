@@ -34,6 +34,7 @@ public class FrameParametros extends javax.swing.JFrame {
     private int duracionTurno;
     private int puntosParaSubirNivel2;
     private int puntosParaSubirNivel3;
+    private int tiempoFrecuenciaPedidos;
 
     /**
      * Creates new form FrameParametros
@@ -63,6 +64,7 @@ public class FrameParametros extends javax.swing.JFrame {
         duracionTurno = configuracion.getDuracionTurno();
         puntosParaSubirNivel2 = configuracion.getPuntosParaSubirNivel2();
         puntosParaSubirNivel3 = configuracion.getPuntosParaSubirNivel3();
+        tiempoFrecuenciaPedidos = configuracion.getTiempoFrecuenciaPedidos();
     }
 
     private void definirConfiguracionInicial() {
@@ -86,6 +88,8 @@ public class FrameParametros extends javax.swing.JFrame {
         SpinnerNumberModel modelPuntosParaSubirNivel3 = new SpinnerNumberModel(puntosParaSubirNivel3,
                 MIN_PUNTOS_PARA_SUBIR_NIVEL_3, null, 1);
         jSpinnerPuntosParaSubirNivel3.setModel(modelPuntosParaSubirNivel3);
+        SpinnerNumberModel modelTiempoFrecuenciaPedidos = new SpinnerNumberModel(tiempoFrecuenciaPedidos, 3, null, 1);
+        jSpinnerTiempoFrecuenciaPedidos.setModel(modelTiempoFrecuenciaPedidos);
     }
 
     /**
@@ -96,7 +100,9 @@ public class FrameParametros extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -113,6 +119,7 @@ public class FrameParametros extends javax.swing.JFrame {
         jLabelDuracionTurnoTitle = new javax.swing.JLabel();
         jLabelPuntosParaSubirNivel2Title = new javax.swing.JLabel();
         jLabelPuntosParaSubirNivel3Title = new javax.swing.JLabel();
+        jLabelFrecuenciaAparicionTitle = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jSpinnerSegPedidosNivel1 = new javax.swing.JSpinner();
         jSpinnerSegPedidosNivel2 = new javax.swing.JSpinner();
@@ -121,6 +128,7 @@ public class FrameParametros extends javax.swing.JFrame {
         jSpinnerDuracionTurno = new javax.swing.JSpinner();
         jSpinnerPuntosParaSubirNivel2 = new javax.swing.JSpinner();
         jSpinnerPuntosParaSubirNivel3 = new javax.swing.JSpinner();
+        jSpinnerTiempoFrecuenciaPedidos = new javax.swing.JSpinner();
         jPanel9 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -149,11 +157,13 @@ public class FrameParametros extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
-                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 226, Short.MAX_VALUE));
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 238, Short.MAX_VALUE)
+        );
         jPanel6Layout.setVerticalGroup(
-                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 242, Short.MAX_VALUE));
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 278, Short.MAX_VALUE)
+        );
 
         jPanel3.add(jPanel6);
 
@@ -177,8 +187,11 @@ public class FrameParametros extends javax.swing.JFrame {
         jLabelPuntosParaSubirNivel2Title.setText("Puntos para subir a Nivel 2 (Min. 50pts)");
         jPanel7.add(jLabelPuntosParaSubirNivel2Title);
 
-        jLabelPuntosParaSubirNivel3Title.setText("Puntos para subier a nivel  (Min. 80 pts)");
+        jLabelPuntosParaSubirNivel3Title.setText("Puntos para subier a nivel 3 (Min. 80 pts)");
         jPanel7.add(jLabelPuntosParaSubirNivel3Title);
+
+        jLabelFrecuenciaAparicionTitle.setText("Tiempo frecuencia de aparicion de pedidos");
+        jPanel7.add(jLabelFrecuenciaAparicionTitle);
 
         jPanel3.add(jPanel7);
 
@@ -190,17 +203,20 @@ public class FrameParametros extends javax.swing.JFrame {
         jPanel8.add(jSpinnerDuracionTurno);
         jPanel8.add(jSpinnerPuntosParaSubirNivel2);
         jPanel8.add(jSpinnerPuntosParaSubirNivel3);
+        jPanel8.add(jSpinnerTiempoFrecuenciaPedidos);
 
         jPanel3.add(jPanel8);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 226, Short.MAX_VALUE));
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 238, Short.MAX_VALUE)
+        );
         jPanel9Layout.setVerticalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 242, Short.MAX_VALUE));
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 278, Short.MAX_VALUE)
+        );
 
         jPanel3.add(jPanel9);
 
@@ -237,14 +253,13 @@ public class FrameParametros extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -274,6 +289,7 @@ public class FrameParametros extends javax.swing.JFrame {
         duracionTurno = (int) jSpinnerDuracionTurno.getValue();
         puntosParaSubirNivel2 = (int) jSpinnerPuntosParaSubirNivel2.getValue();
         puntosParaSubirNivel3 = (int) jSpinnerPuntosParaSubirNivel3.getValue();
+        tiempoFrecuenciaPedidos = (int) jSpinnerTiempoFrecuenciaPedidos.getValue();
 
         configuracion.setSegundosPorPedidosNivel1(segundosPorPedidosNivel1);
         configuracion.setSegundosPorPedidosNivel2(segundosPorPedidosNivel2);
@@ -282,6 +298,8 @@ public class FrameParametros extends javax.swing.JFrame {
         configuracion.setDuracionTurno(duracionTurno);
         configuracion.setPuntosParaSubirNivel2(puntosParaSubirNivel2);
         configuracion.setPuntosParaSubirNivel3(puntosParaSubirNivel3);
+        configuracion.setTiempoFrecuenciaPedidos(tiempoFrecuenciaPedidos);
+
     }
 
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRegresarActionPerformed
@@ -298,6 +316,7 @@ public class FrameParametros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelDuracionTurnoTitle;
+    private javax.swing.JLabel jLabelFrecuenciaAparicionTitle;
     private javax.swing.JLabel jLabelMaxPedidosActivosTitle;
     private javax.swing.JLabel jLabelPuntosParaSubirNivel2Title;
     private javax.swing.JLabel jLabelPuntosParaSubirNivel3Title;
@@ -322,5 +341,6 @@ public class FrameParametros extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinnerSegPedidosNivel1;
     private javax.swing.JSpinner jSpinnerSegPedidosNivel2;
     private javax.swing.JSpinner jSpinnerSegPedidosNivel3;
+    private javax.swing.JSpinner jSpinnerTiempoFrecuenciaPedidos;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,6 +25,7 @@ public class ConfiguracionJuegoDAO {
     private int duracionTurno;
     private int puntosParaSubirNivel2;
     private int puntosParaSubirNivel3;
+    private int tiempoFrecuenciaPedidos;
     private ConfiguracionJuego configuracion;
 
     public void actualizarConfiguracion(ConfiguracionJuego configuracion) throws SQLException {
@@ -37,6 +38,7 @@ public class ConfiguracionJuegoDAO {
         actualizarDuracionTurno();
         actualizarPuntosParaSubirNivel2();
         actualizarPuntosParaSubirNivel3();
+        actualizarTiempoFrecuenciaPedidos();
     }
 
     public ConfiguracionJuego obtenerConfiguracion() throws SQLException {
@@ -70,6 +72,9 @@ public class ConfiguracionJuegoDAO {
                     case 7:
                         config.setPuntosParaSubirNivel3(valor);
                         break;
+                    case 8:
+                        config.setTiempoFrecuenciaPedidos(valor);
+                        break;
                 }
             }
         } catch (SQLException e) {
@@ -86,6 +91,7 @@ public class ConfiguracionJuegoDAO {
         this.duracionTurno = configuracion.getDuracionTurno();
         this.puntosParaSubirNivel2 = configuracion.getPuntosParaSubirNivel2();
         this.puntosParaSubirNivel3 = configuracion.getPuntosParaSubirNivel3();
+        this.tiempoFrecuenciaPedidos = configuracion.getTiempoFrecuenciaPedidos();
 
     }
 
@@ -164,6 +170,17 @@ public class ConfiguracionJuegoDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new SQLException("Error al actualizar puntos_para_subir_nivel3: " + e.getMessage());
+        }
+    }
+
+    private void actualizarTiempoFrecuenciaPedidos() throws SQLException {
+        String query = "UPDATE configuracion_juego SET valor = ? WHERE id = 8";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, tiempoFrecuenciaPedidos);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Error al actualizar tiempo_frecuencia_pedidos: " + e.getMessage());
         }
     }
 

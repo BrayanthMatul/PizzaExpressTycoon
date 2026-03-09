@@ -4,6 +4,8 @@
  */
 package com.mycompany.primera_practica_codigo.util;
 
+import com.mycompany.primera_practica_codigo.modelo.entidades.Pedido;
+
 /**
  *
  * @author Matul
@@ -15,5 +17,9 @@ public interface Actualizable {
     void actualizarPuntos(int puntos);
 
     void actualizarPuntosParaSubirNivel(int puntosAcumulados, int puntosParaSubirNivel);
+
+    void agregarPedido(Pedido pedido);
+
+    void eliminarPedido(int numeroPedido);
 
 }

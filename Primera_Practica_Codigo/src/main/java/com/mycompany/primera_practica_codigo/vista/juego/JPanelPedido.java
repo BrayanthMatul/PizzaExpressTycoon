@@ -4,7 +4,10 @@
  */
 package com.mycompany.primera_practica_codigo.vista.juego;
 
+import com.mycompany.primera_practica_codigo.modelo.entidades.EstadoPedido;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Pedido;
+import com.mycompany.primera_practica_codigo.util.Actualizable;
+import com.mycompany.primera_practica_codigo.util.ActualizablePedido;
 import com.mycompany.primera_practica_codigo.util.Temporizable;
 import com.mycompany.primera_practica_codigo.util.Temporizador;
 
@@ -12,7 +15,7 @@ import com.mycompany.primera_practica_codigo.util.Temporizador;
  *
  * @author Matul
  */
-public class JPanelPedido extends javax.swing.JPanel implements Temporizable {
+public class JPanelPedido extends javax.swing.JPanel implements Temporizable, ActualizablePedido {
 
     private Pedido pedido;
     private int tiempoLimiteSeg;
@@ -28,13 +31,24 @@ public class JPanelPedido extends javax.swing.JPanel implements Temporizable {
      */
     public JPanelPedido(Pedido pedido) {
         this.pedido = pedido;
+        this.pedido.setActualizablePedido(this);
         this.tiempoLimiteSeg = pedido.getTiempoLimiteSeg();
         this.timpoRestanteSMinutos = pedido.getTiempoLimiteSeg() / 60;
         this.tiempoRestanteSSegundos = pedido.getTiempoLimiteSeg() % 60;
         initComponents();
         colocarDatosIniciales();
         activarTemporizador();
+    }
 
+    public int getNumeroOrden() {
+        return numeroOrden;
+    }
+
+    public void detenerTemporizador() {
+        if (temporizador != null && temporizador.isAlive()) {
+            temporizador.interrupt();
+            temporizador = null;
+        }
     }
 
     private void activarTemporizador() {
@@ -57,7 +71,23 @@ public class JPanelPedido extends javax.swing.JPanel implements Temporizable {
         this.timpoRestanteSMinutos = minutos;
         this.tiempoRestanteSSegundos = tiempoRestanteSeg % 60;
         jLabelTiempoRestante.setText(String.format("%02d : %02d", timpoRestanteSMinutos, tiempoRestanteSSegundos));
-        jProgressBarTiempo.setValue((int) (((double) tiempoRestanteSeg / tiempoLimiteSeg) * 100));
+        int tiempoTotalRestante = (minutos * 60) + tiempoRestanteSeg;
+        jProgressBarTiempo.setValue((int) (((double) tiempoTotalRestante / tiempoLimiteSeg) * 100));
+        pedido.restarTiempo();
+    }
+
+    @Override
+    public void actualizarEstadoPedido(EstadoPedido nuevoEstado) {
+
+        if (nuevoEstado == EstadoPedido.RECIBIDA) {
+            jLabelEstadoActual.setText("Estado Actual: RECIBIDA");
+        } else if (nuevoEstado == EstadoPedido.PREPARANDO) {
+            jLabelEstadoActual.setText("Estado Actual: PREPARANDO");
+        } else if (nuevoEstado == EstadoPedido.EN_HORNO) {
+            jLabelEstadoActual.setText("Estado Actual: EN HORNO");
+        } else if (nuevoEstado == EstadoPedido.ENTREGADO) {
+            jLabelEstadoActual.setText("Estado Actual: ENTREGADO");
+        }
     }
 
     /**
@@ -151,11 +181,11 @@ public class JPanelPedido extends javax.swing.JPanel implements Temporizable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSiguientePasoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSiguientePasoActionPerformed
-        // TODO add your handling code here:
+        this.pedido.avanzarEstado();
     }// GEN-LAST:event_jButtonSiguientePasoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        this.pedido.cancelar();
     }// GEN-LAST:event_jButtonCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

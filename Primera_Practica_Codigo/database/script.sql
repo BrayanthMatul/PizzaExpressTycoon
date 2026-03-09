@@ -60,4 +60,5 @@ INSERT INTO configuracion_juego (nombre, valor) VALUES
     ('maximo_pedidos_activos', 5),
     ('duracion_de_turno', 240),
     ('puntos_para_subir_nivel2', 100),
-    ('puntos_para_subir_nivel3', 150);
+    ('puntos_para_subir_nivel3', 150),
+    ('frecuencia_aparicion_pedidos', 5);

@@ -17,6 +17,7 @@ public class ConfiguracionJuego {
     private int duracionTurno;
     private int puntosParaSubirNivel2;
     private int puntosParaSubirNivel3;
+    private int tiempoFrecuenciaPedidos;
 
     public int getSegundosPorPedidosNivel1() {
         return segundosPorPedidosNivel1;
@@ -72,6 +73,14 @@ public class ConfiguracionJuego {
 
     public void setPuntosParaSubirNivel3(int puntosParaSubirNivel3) {
         this.puntosParaSubirNivel3 = puntosParaSubirNivel3;
+    }
+
+    public int getTiempoFrecuenciaPedidos() {
+        return tiempoFrecuenciaPedidos;
+    }
+
+    public void setTiempoFrecuenciaPedidos(int tiempoFrecuenciaPedidos) {
+        this.tiempoFrecuenciaPedidos = tiempoFrecuenciaPedidos;
     }
 
 }

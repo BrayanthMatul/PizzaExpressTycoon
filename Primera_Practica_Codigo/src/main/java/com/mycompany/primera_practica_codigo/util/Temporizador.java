@@ -29,6 +29,10 @@ public class Temporizador extends Thread {
         return minutos;
     }
 
+    public boolean isTiempoAgotado() {
+        return tiempoAgotado;
+    }
+
     public void notificarCambioDeTiempo() {
         temporizable.cambioDeTiempo(segundos, minutos);
     }
@@ -59,7 +63,7 @@ public class Temporizador extends Thread {
                 notificarCambioDeTiempo();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                throw new RuntimeException("El temporizador fue interrumpido", e);
+                break;
             }
         }
     }
