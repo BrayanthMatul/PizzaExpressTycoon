@@ -62,3 +62,19 @@ INSERT INTO configuracion_juego (nombre, valor) VALUES
     ('puntos_para_subir_nivel2', 100),
     ('puntos_para_subir_nivel3', 150),
     ('frecuencia_aparicion_pedidos', 5);
+
+CREATE TABLE partida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    id_sucursal INT NOT NULL,
+    puntajeTotal INT NOT NULL,
+    pedidosCompletados INT NOT NULL,
+    pedidosCancelados INT NOT NULL,
+    pedidosNoEntregados INT NOT NULL,
+    nivel INT NOT NULL,
+    contadorPedidos INT NOT NULL,
+    fechaYHoraFin TIMESTAMP NOT NULL,
+    tiempoPartida INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_sucursal) REFERENCES sucursal(id) ON DELETE CASCADE
+);

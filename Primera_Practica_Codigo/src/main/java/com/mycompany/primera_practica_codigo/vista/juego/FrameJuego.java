@@ -58,6 +58,12 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
 
             String mensajeError = "¡Tiempo agotado! La partida ha terminado.";
             MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(this, true, mensajeError);
+            try {
+                partida.GuardarDatosPartida();
+            } catch (SQLException e) {
+                String mensajeErrorGuardar = "Error al guardar los datos de la partida: " + e.getMessage();
+                MensajeErrorFrame mensajeErrorGuardarFrame = new MensajeErrorFrame(this, true, mensajeErrorGuardar);
+            }
             this.dispose();
             FrameInicioJugador frameInicioJugador = new FrameInicioJugador(usuario);
             frameInicioJugador.setVisible(true);

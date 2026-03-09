@@ -1,6 +1,6 @@
 package com.mycompany.primera_practica_codigo.modelo.entidades;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -8,6 +8,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.mycompany.primera_practica_codigo.modelo.dao.ConfiguracionJuegoDAO;
+import com.mycompany.primera_practica_codigo.modelo.dao.PartidaDAO;
 import com.mycompany.primera_practica_codigo.modelo.dao.ProductoDAO;
 import com.mycompany.primera_practica_codigo.util.Actualizable;
 import com.mycompany.primera_practica_codigo.util.GeneradorPedidos;
@@ -20,6 +21,7 @@ public class Partida {
     private final int PUNTOS_POR_PEDIDO_CANCELADO = 10;
 
     private int idPartida;
+
     private Usuario jugador;
     private int puntajeTotal;
     private int pedidosCompletados;
@@ -27,16 +29,16 @@ public class Partida {
     private int pedidosNoEntregados;
     private int nivel;
     private int contadorPedidos;
-    private int maximoPedidosActivos;
-    private ConfiguracionJuego configuracionJuego;
-    private Timestamp fechaYHoraInicio;
     private Timestamp fechaYHoraFin;
     private int tiempoPartida;
+
+    private ConfiguracionJuego configuracionJuego;
     private int puntosParaSubirNivel2;
     private int puntosParaSubirNivel3;
     private int segundosPorPedidoNivel1;
     private int segundosPorPedidoNivel2;
     private int segundosPorPedidoNivel3;
+    private int maximoPedidosActivos;
     private int frecuenciaGeneracionPedidosNivel;
     private int puntosAcumuladosNivelActual;
     private FrameJuego frameJuego;
@@ -60,6 +62,42 @@ public class Partida {
         this.pedidosActivos = new AtomicInteger(0);
         this.frameJuego = new FrameJuego(jugador, this);
         actualizable = frameJuego;
+    }
+
+    public int getPuntajeTotal() {
+        return puntajeTotal;
+    }
+
+    public Usuario getJugador() {
+        return jugador;
+    }
+
+    public int getPedidosCompletados() {
+        return pedidosCompletados;
+    }
+
+    public int getPedidosCancelados() {
+        return pedidosCancelados;
+    }
+
+    public int getPedidosNoEntregados() {
+        return pedidosNoEntregados;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public int getContadorPedidos() {
+        return contadorPedidos;
+    }
+
+    public Timestamp getFechaYHoraFin() {
+        return fechaYHoraFin;
+    }
+
+    public int getTiempoPartida() {
+        return tiempoPartida;
     }
 
     public int tiempoPartida() {
@@ -238,5 +276,12 @@ public class Partida {
         this.puntosParaSubirNivel3 = configuracionJuego.getPuntosParaSubirNivel3();
         this.frecuenciaGeneracionPedidosNivel = configuracionJuego.getTiempoFrecuenciaPedidos();
 
+    }
+
+    public void GuardarDatosPartida() throws SQLException {
+        generadorPedidos.interrupt();
+        fechaYHoraFin = new Timestamp(System.currentTimeMillis());
+        PartidaDAO partidaDAO = new PartidaDAO();
+        partidaDAO.guardarPartida(this);
     }
 }
