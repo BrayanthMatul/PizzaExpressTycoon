@@ -209,7 +209,7 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -246,54 +246,68 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
+        jPanelDatos.setBackground(new java.awt.Color(255, 204, 102));
         jPanelDatos.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
 
+        jPanel6.setBackground(new java.awt.Color(255, 153, 51));
         jPanel6.setLayout(new java.awt.GridLayout(0, 1));
         jPanel6.add(jLabel4);
 
+        jLabelJugador.setForeground(new java.awt.Color(255, 255, 255));
         jLabelJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelJugador.setText("Jugador");
         jPanel6.add(jLabelJugador);
 
+        jLabelNombreJugador.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelNombreJugador.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNombreJugador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNombreJugador.setText("Nombre Jugador");
         jPanel6.add(jLabelNombreJugador);
 
         jPanelDatos.add(jPanel6);
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 102));
         jPanel7.setLayout(new java.awt.GridLayout(0, 1));
         jPanel7.add(jLabel5);
 
+        jLabelNivel.setForeground(new java.awt.Color(102, 0, 51));
         jLabelNivel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNivel.setText("Nivel : 1");
         jPanel7.add(jLabelNivel);
 
+        jLabelNivelSiguiente.setForeground(new java.awt.Color(102, 0, 51));
         jLabelNivelSiguiente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNivelSiguiente.setText("Siguiente 10 / 100 EXP");
         jPanel7.add(jLabelNivelSiguiente);
 
         jPanelDatos.add(jPanel7);
 
+        jPanel8.setBackground(new java.awt.Color(255, 153, 51));
         jPanel8.setLayout(new java.awt.GridLayout(0, 1));
         jPanel8.add(jLabel6);
 
+        jLabelPuntajeTitle.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPuntajeTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPuntajeTitle.setText("Puntaje");
         jPanel8.add(jLabelPuntajeTitle);
 
+        jLabelPuntaje.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPuntaje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPuntaje.setText("0 puntos");
         jPanel8.add(jLabelPuntaje);
 
         jPanelDatos.add(jPanel8);
 
+        jPanel9.setBackground(new java.awt.Color(255, 255, 51));
         jPanel9.setLayout(new java.awt.GridLayout(0, 1));
         jPanel9.add(jLabel7);
 
+        jLabelTiempoTitle.setForeground(new java.awt.Color(102, 0, 51));
         jLabelTiempoTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTiempoTitle.setText("Tiempo restante de turno");
         jPanel9.add(jLabelTiempoTitle);
 
+        jLabelTiempo.setForeground(new java.awt.Color(102, 0, 51));
         jLabelTiempo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTiempo.setText(" :  ");
         jPanel9.add(jLabelTiempo);
@@ -304,8 +318,10 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
 
         jPanelEspacio.setLayout(new java.awt.BorderLayout());
 
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
         jPanel2.setLayout(new java.awt.GridLayout(0, 1));
 
+        jLabelPedidosTitle.setForeground(new java.awt.Color(0, 0, 0));
         jLabelPedidosTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelPedidosTitle.setText("Pedidos");
         jPanel2.add(jLabelPedidosTitle);
@@ -314,12 +330,15 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
 
         jPanel1.add(jPanelEspacio);
 
+        jPanelPedidos.setBackground(new java.awt.Color(255, 204, 51));
         jPanelPedidos.setLayout(new java.awt.GridLayout(2, 4, 10, 10));
         jPanel1.add(jPanelPedidos);
 
+        jPanelOpcionesSalida.setBackground(new java.awt.Color(255, 102, 102));
         jPanelOpcionesSalida.setLayout(new java.awt.GridLayout(0, 1));
         jPanelOpcionesSalida.add(jLabel10);
 
+        jPanel3.setBackground(new java.awt.Color(255, 102, 102));
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
         jPanel3.add(jLabel8);
 
@@ -340,13 +359,13 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 1160, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1160, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

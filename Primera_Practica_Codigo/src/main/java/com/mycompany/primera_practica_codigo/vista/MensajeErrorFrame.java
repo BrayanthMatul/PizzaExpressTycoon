@@ -39,12 +39,17 @@ public class MensajeErrorFrame extends javax.swing.JDialog {
 
         panelPrincipal = new javax.swing.JPanel();
         panelElementos = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jlblMensajeError = new javax.swing.JLabel();
         jbuttonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panelElementos.setLayout(new java.awt.GridLayout(0, 1, 0, 20));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/primera_practica_codigo/imagenes/error.png"))); // NOI18N
+        panelElementos.add(jLabel1);
 
         jlblMensajeError.setText("Mensaje de Error");
         panelElementos.add(jlblMensajeError);
@@ -70,6 +75,7 @@ public class MensajeErrorFrame extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbuttonAceptar;
     private javax.swing.JLabel jlblMensajeError;
     private javax.swing.JPanel panelElementos;

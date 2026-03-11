@@ -14,6 +14,8 @@ import com.mycompany.primera_practica_codigo.modelo.entidades.Rol;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
 import com.mycompany.primera_practica_codigo.util.RecolectorDeDatos;
+import com.mycompany.primera_practica_codigo.util.VerificadorDatosSucursal;
+import com.mycompany.primera_practica_codigo.util.VerificadorDatosUsuario;
 import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
 import com.mycompany.primera_practica_codigo.vista.MensajeExitoFrame;
 import com.mycompany.primera_practica_codigo.vista.superadmin.FrameInicioSuperAdministrador;
@@ -154,17 +156,18 @@ public class FrameEditorUsuario extends javax.swing.JFrame {
     }
 
     private void validarDatosUsuario() {
-        this.errorEnValidacion = false;
-        String mensajeError = "";
-
-        if (nombreUsuario.length() < 4) {
-            mensajeError = "El nombre de usuario debe tener al menos 4 caracteres.";
-            mostrarMensajeErrorValidador(mensajeError);
-        }
-
-        if (password.length() < 6) {
-            mensajeError = "La contraseña debe tener al menos 6 caracteres.";
-            mostrarMensajeErrorValidador(mensajeError);
+        errorEnValidacion = false;
+        VerificadorDatosUsuario verificadorDatosUsuario = new VerificadorDatosUsuario();
+        try {
+            verificadorDatosUsuario.verificarDatos(nombreUsuario);
+            if (verificadorDatosUsuario.getExisteNombreUsuario() && !esEdicion) {
+                errorEnValidacion = true;
+                String mensajeError = "Ya existe un usuario con ese nombre, por favor elija otro";
+                mostrarMensajeErrorValidador(mensajeError);
+            }
+        } catch (SQLException e) {
+            String mensajeErrorBD = "Error al verificar los datos en la base de datos";
+            mostrarMensajeErrorValidador(mensajeErrorBD);
         }
     }
 
@@ -388,6 +391,7 @@ public class FrameEditorUsuario extends javax.swing.JFrame {
         recolectarDatosUsuario();
 
         if (!errorEnRecolector) {
+            validarDatosUsuario();
             if (!errorEnValidacion) {
                 if (!esEdicion) {
                     guardarUsuario();

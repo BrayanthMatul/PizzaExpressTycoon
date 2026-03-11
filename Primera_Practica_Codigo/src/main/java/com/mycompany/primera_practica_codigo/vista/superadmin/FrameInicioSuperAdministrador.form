@@ -235,11 +235,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver estadisticas globlales"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEstadisticasGlobalesActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonRankingJugadores">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ver ranking de jugadores"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRankingJugadoresActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

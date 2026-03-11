@@ -24,6 +24,7 @@ public class FrameLogin extends javax.swing.JFrame {
          */
         public FrameLogin() {
                 initComponents();
+                setTitle("Inicio");
                 setLocationRelativeTo(null);
         }
 
@@ -35,101 +36,118 @@ public class FrameLogin extends javax.swing.JFrame {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
-        private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-                jPanel1 = new javax.swing.JPanel();
-                jPanel2 = new javax.swing.JPanel();
-                jPanel3 = new javax.swing.JPanel();
-                jPanel7 = new javax.swing.JPanel();
-                jPanel5 = new javax.swing.JPanel();
-                jLabelTtle = new javax.swing.JLabel();
-                jLabelUsuario = new javax.swing.JLabel();
-                jTextFieldUsuario = new javax.swing.JTextField();
-                jLabelUsuarioPassword = new javax.swing.JLabel();
-                jPasswordFieldPassword = new javax.swing.JPasswordField();
-                bottonLogin = new javax.swing.JButton();
-                jPanel6 = new javax.swing.JPanel();
-                jPanel4 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabelTtle = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
+        jTextFieldUsuario = new javax.swing.JTextField();
+        jLabelUsuarioPassword = new javax.swing.JLabel();
+        jPasswordFieldPassword = new javax.swing.JPasswordField();
+        bottonLogin = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
 
-                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-                jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
-                javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-                jPanel2.setLayout(jPanel2Layout);
-                jPanel2Layout.setHorizontalGroup(
-                                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 0, Short.MAX_VALUE));
-                jPanel2Layout.setVerticalGroup(
-                                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 346, Short.MAX_VALUE));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 102));
 
-                jPanel1.add(jPanel2);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 346, Short.MAX_VALUE)
+        );
 
-                jPanel3.setLayout(new java.awt.GridLayout(0, 1, 0, 15));
-                jPanel3.add(jPanel7);
+        jPanel1.add(jPanel2);
 
-                jLabelTtle.setFont(new java.awt.Font("Greconian", 0, 18)); // NOI18N
-                jLabelTtle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabelTtle.setText("Pizza Express Tycoon");
-                jPanel5.add(jLabelTtle);
+        jPanel3.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel3.setLayout(new java.awt.GridLayout(0, 1, 0, 15));
 
-                jPanel3.add(jPanel5);
+        jPanel7.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel3.add(jPanel7);
 
-                jLabelUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabelUsuario.setText("Usuario");
-                jPanel3.add(jLabelUsuario);
-                jPanel3.add(jTextFieldUsuario);
+        jLabelTtle.setBackground(new java.awt.Color(255, 204, 102));
+        jLabelTtle.setFont(new java.awt.Font("Greconian", 0, 18)); // NOI18N
+        jLabelTtle.setForeground(new java.awt.Color(102, 0, 0));
+        jLabelTtle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelTtle.setText("Pizza Express Tycoon");
+        jPanel5.add(jLabelTtle);
 
-                jLabelUsuarioPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabelUsuarioPassword.setText("Contraseña");
-                jPanel3.add(jLabelUsuarioPassword);
-                jPanel3.add(jPasswordFieldPassword);
+        jPanel3.add(jPanel5);
 
-                bottonLogin.setText("Iniciar Sesion");
-                bottonLogin.addActionListener(this::bottonLoginActionPerformed);
-                jPanel3.add(bottonLogin);
+        jLabelUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUsuario.setText("Usuario");
+        jPanel3.add(jLabelUsuario);
+        jPanel3.add(jTextFieldUsuario);
 
-                javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-                jPanel6.setLayout(jPanel6Layout);
-                jPanel6Layout.setHorizontalGroup(
-                                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 223, Short.MAX_VALUE));
-                jPanel6Layout.setVerticalGroup(
-                                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 30, Short.MAX_VALUE));
+        jLabelUsuarioPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUsuarioPassword.setText("Contraseña");
+        jPanel3.add(jLabelUsuarioPassword);
+        jPanel3.add(jPasswordFieldPassword);
 
-                jPanel3.add(jPanel6);
+        bottonLogin.setBackground(new java.awt.Color(204, 51, 0));
+        bottonLogin.setForeground(new java.awt.Color(255, 255, 255));
+        bottonLogin.setText("Iniciar Sesion");
+        bottonLogin.addActionListener(this::bottonLoginActionPerformed);
+        jPanel3.add(bottonLogin);
 
-                jPanel1.add(jPanel3);
+        jPanel6.setBackground(new java.awt.Color(255, 204, 102));
 
-                javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-                jPanel4.setLayout(jPanel4Layout);
-                jPanel4Layout.setHorizontalGroup(
-                                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 0, Short.MAX_VALUE));
-                jPanel4Layout.setVerticalGroup(
-                                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGap(0, 346, Short.MAX_VALUE));
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 223, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
 
-                jPanel1.add(jPanel4);
+        jPanel3.add(jPanel6);
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-                getContentPane().setLayout(layout);
-                layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                Short.MAX_VALUE));
-                layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+        jPanel1.add(jPanel3);
 
-                pack();
-        }// </editor-fold>//GEN-END:initComponents
+        jPanel4.setBackground(new java.awt.Color(255, 204, 102));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 346, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel4);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
         private void validarCredenciales() {
 
@@ -176,19 +194,19 @@ public class FrameLogin extends javax.swing.JFrame {
                 validarCredenciales();
         }// GEN-LAST:event_bottonLoginActionPerformed
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton bottonLogin;
-        private javax.swing.JLabel jLabelTtle;
-        private javax.swing.JLabel jLabelUsuario;
-        private javax.swing.JLabel jLabelUsuarioPassword;
-        private javax.swing.JPanel jPanel1;
-        private javax.swing.JPanel jPanel2;
-        private javax.swing.JPanel jPanel3;
-        private javax.swing.JPanel jPanel4;
-        private javax.swing.JPanel jPanel5;
-        private javax.swing.JPanel jPanel6;
-        private javax.swing.JPanel jPanel7;
-        private javax.swing.JPasswordField jPasswordFieldPassword;
-        private javax.swing.JTextField jTextFieldUsuario;
-        // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bottonLogin;
+    private javax.swing.JLabel jLabelTtle;
+    private javax.swing.JLabel jLabelUsuario;
+    private javax.swing.JLabel jLabelUsuarioPassword;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPasswordField jPasswordFieldPassword;
+    private javax.swing.JTextField jTextFieldUsuario;
+    // End of variables declaration//GEN-END:variables
 }

@@ -50,6 +50,28 @@ public class ProductoDAO extends BDCRUD<Producto, Integer> {
                                                                        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public Optional<Producto> encontrarPorNombreYIdSucursal(String nombre, Integer idSucursal) throws SQLException {
+        String query = "SELECT * FROM producto WHERE nombre = ? AND sucursal_id = ?";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, nombre);
+            ps.setInt(2, idSucursal);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Producto producto = new Producto(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        null, // No necesario cargar la sucursal completa aquí
+                        rs.getBoolean("activo"));
+                return Optional.of(producto);
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error al encontrar producto por nombre y sucursal: " + e.getMessage());
+        }
+    }
+
     @Override
     public List<Producto> obtenerTodo() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from

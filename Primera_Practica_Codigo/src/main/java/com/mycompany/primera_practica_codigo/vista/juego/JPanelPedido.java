@@ -102,7 +102,7 @@ public class JPanelPedido extends javax.swing.JPanel implements Temporizable, Ac
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -124,25 +124,37 @@ public class JPanelPedido extends javax.swing.JPanel implements Temporizable, Ac
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabelNumeroOrden.setBackground(new java.awt.Color(255, 255, 204));
+        jLabelNumeroOrden.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNumeroOrden.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNumeroOrden.setText("Numero de Orden: #");
         jPanel1.add(jLabelNumeroOrden);
 
         add(jPanel1);
 
+        jPanelNombreYTIempo.setBackground(new java.awt.Color(255, 255, 204));
         jPanelNombreYTIempo.setLayout(new java.awt.GridLayout(0, 1, 0, 10));
 
+        jLabelNombreProducto.setBackground(new java.awt.Color(255, 255, 204));
+        jLabelNombreProducto.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNombreProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelNombreProducto.setText("Nombre producto");
         jPanelNombreYTIempo.add(jLabelNombreProducto);
 
+        jPanelTiempo.setBackground(new java.awt.Color(255, 255, 204));
         jPanelTiempo.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
+        jLabelTiempoTitle.setForeground(new java.awt.Color(0, 0, 0));
         jLabelTiempoTitle.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelTiempoTitle.setText("Tiempo");
         jPanelTiempo.add(jLabelTiempoTitle);
+
+        jProgressBarTiempo.setBackground(new java.awt.Color(255, 255, 204));
         jPanelTiempo.add(jProgressBarTiempo);
 
+        jLabelTiempoRestante.setForeground(new java.awt.Color(0, 0, 0));
         jLabelTiempoRestante.setText("00 : 00");
         jPanelTiempo.add(jLabelTiempoRestante);
 
@@ -150,17 +162,22 @@ public class JPanelPedido extends javax.swing.JPanel implements Temporizable, Ac
 
         add(jPanelNombreYTIempo);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
+        jLabelEstadoActual.setForeground(new java.awt.Color(0, 0, 0));
         jLabelEstadoActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelEstadoActual.setText("Estado Actual");
         jPanel2.add(jLabelEstadoActual);
 
         add(jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 204));
         jPanel3.setLayout(new java.awt.GridLayout(0, 1));
         jPanel3.add(jLabel5);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel4.setForeground(new java.awt.Color(255, 255, 204));
         jPanel4.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         jButtonSiguientePaso.setText("Siguiente Paso");

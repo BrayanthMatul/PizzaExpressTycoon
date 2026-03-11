@@ -20,8 +20,8 @@ public class GuardadorReporte {
         escribirReportePartidas(partidas, archivo);
     }
 
-    public void guardarReporteRanking(List<Jugador> jugadores) throws Exception {
-        File archivo = seleccionarArchivo("Guardar Reporte de Ranking", "reporte_ranking.csv");
+    public void guardarReporteRanking(List<Jugador> jugadores, String nombreArchivo) throws Exception {
+        File archivo = seleccionarArchivo("Guardar Reporte de Ranking", nombreArchivo);
         if (archivo == null) {
             return;
         }

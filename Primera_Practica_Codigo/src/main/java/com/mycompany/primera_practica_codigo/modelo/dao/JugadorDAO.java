@@ -136,6 +136,29 @@ public class JugadorDAO extends BDCRUD<Jugador, Integer> {
         }
     }
 
+    public List<Jugador> obtenerTopJugadoresGlobal() throws SQLException {
+        String query = "SELECT j.*, u.nombre_usuario FROM jugador j JOIN usuario u ON j.id_usuario = u.id;";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            List<Jugador> jugadores = new java.util.ArrayList<>();
+            while (rs.next()) {
+                Jugador jugador = new Jugador();
+                jugador.setNombreUsuario(rs.getString("nombre_usuario"));
+                jugador.setPartidasJugadas(rs.getInt("partidasJugadas"));
+                jugador.setNivelMaximoAlcanzado(rs.getInt("nivelMaximoAlcanzado"));
+                jugador.setPuntajeMaximo(rs.getInt("puntajeMaximo"));
+                jugador.setPuntajeTotalAcumulado(rs.getInt("puntajeTotalAcumulado"));
+                jugadores.add(jugador);
+            }
+            ordenarJugadoresPorPuntaje(jugadores);
+            return jugadores;
+
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener top jugadores global: " + e.getMessage());
+        }
+    }
+
     public List<Jugador> obtenerTopJugadoresPorSucursal(int idSucursal) throws SQLException {
         List<Jugador> jugadores = obtenerJugadoresPorSucursal(idSucursal);
         if (jugadores != null) {
