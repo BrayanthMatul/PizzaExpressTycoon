@@ -105,7 +105,31 @@ public class PartidaDAO extends BDCRUD<Partida, Integer> {
     }
 
     public List<Partida> obtenerPartidasPorUsuario(int idUsuario) throws SQLException {
-        return null;
+        String query = "SELECT * FROM partida WHERE id_usuario = ?";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+            List<Partida> partidas = new ArrayList<>();
+            while (rs.next()) {
+                Partida partida = new Partida();
+                partida.setIdPartida(rs.getInt("id"));
+                partida.setIdUsuario(rs.getInt("id_usuario"));
+                partida.setIdSucursal(rs.getInt("id_sucursal"));
+                partida.setPuntajeTotal(rs.getInt("puntajeTotal"));
+                partida.setPedidosEntregados(rs.getInt("pedidosCompletados"));
+                partida.setPedidosCancelados(rs.getInt("pedidosCancelados"));
+                partida.setPedidosNoEntregados(rs.getInt("pedidosNoEntregados"));
+                partida.setNivel(rs.getInt("nivel"));
+                partida.setContadorPedidos(rs.getInt("contadorPedidos"));
+                partida.setFechaYHoraFin(rs.getTimestamp("fechaYHoraFin"));
+                partida.setTiempoPartida(rs.getInt("tiempoPartida"));
+                partidas.add(partida);
+            }
+            return partidas;
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener las partidas por usuario: " + e.getMessage());
+        }
     }
 
     public List<Partida> obtenerPartidasPorSucursal(int idSucursal) throws SQLException {
