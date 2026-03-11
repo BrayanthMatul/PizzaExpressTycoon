@@ -17,23 +17,32 @@ import com.mycompany.primera_practica_codigo.vista.juego.FrameJuego;
 
 public class Partida {
 
+    // Constantes
     private final int PUNTOS_POR_PEDIDO_ENTREGADO = 20;
     private final int PUNTOS_POR_PEDIDO_NO_ENTREGADO = 15;
     private final int PUNTOS_POR_PEDIDO_CANCELADO = 10;
     private final int PUNTOS_EXTRAS_POR_EFICIENCIA = 10;
 
+    // Identificadores y datos de usuario
     private int idPartida;
-
+    private int idUsuario;
+    private int idSucursal;
+    private String nombreJugador;
     private Usuario jugador;
+
+    // Estado de la partida
+    private boolean partidaActiva;
+    private int nivel;
     private int puntajeTotal;
     private int pedidosCompletados;
     private int pedidosCancelados;
     private int pedidosNoEntregados;
-    private int nivel;
     private int contadorPedidos;
+    private int puntosAcumuladosNivelActual;
     private Timestamp fechaYHoraFin;
     private int tiempoPartida;
 
+    // Configuración de la partida
     private ConfiguracionJuego configuracionJuego;
     private int puntosParaSubirNivel2;
     private int puntosParaSubirNivel3;
@@ -42,18 +51,23 @@ public class Partida {
     private int segundosPorPedidoNivel3;
     private int maximoPedidosActivos;
     private int frecuenciaGeneracionPedidosNivel;
-    private int puntosAcumuladosNivelActual;
+
+    // Objetos de utilidad y control
     private FrameJuego frameJuego;
     private Actualizable actualizable;
-    private boolean partidaActiva;
     private List<Producto> productosActivos;
     private AtomicInteger pedidosActivos;
     private GeneradorPedidos generadorPedidos;
     private List<Pedido> pedidos;
     private final Lock lockPedidos = new ReentrantLock();
 
+    public Partida() {
+
+    }
+
     public Partida(Usuario jugador) {
         this.jugador = jugador;
+        this.idSucursal = jugador.getSucursal().getId();
         this.puntajeTotal = 0;
         this.nivel = 1;
         this.contadorPedidos = 0;
@@ -68,6 +82,7 @@ public class Partida {
         this.pedidos = new ArrayList<>();
     }
 
+    // Getters y Setters ordenados
     public int getIdPartida() {
         return idPartida;
     }
@@ -76,52 +91,104 @@ public class Partida {
         this.idPartida = idPartida;
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public int getPuntajeTotal() {
-        return puntajeTotal;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombreJugador() {
+        return nombreJugador;
+    }
+
+    public void setNombreJugador(String nombreJugador) {
+        this.nombreJugador = nombreJugador;
     }
 
     public Usuario getJugador() {
         return jugador;
     }
 
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public boolean isPartidaActiva() {
+        return partidaActiva;
+    }
+
+    public void setPartidaActiva(boolean partidaActiva) {
+        this.partidaActiva = partidaActiva;
+    }
+
+    public int getPuntajeTotal() {
+        return puntajeTotal;
+    }
+
+    public void setPuntajeTotal(int puntajeTotal) {
+        this.puntajeTotal = puntajeTotal;
+    }
+
     public int getPedidosCompletados() {
         return pedidosCompletados;
+    }
+
+    public void setPedidosEntregados(int pedidosCompletados) {
+        this.pedidosCompletados = pedidosCompletados;
     }
 
     public int getPedidosCancelados() {
         return pedidosCancelados;
     }
 
+    public void setPedidosCancelados(int pedidosCancelados) {
+        this.pedidosCancelados = pedidosCancelados;
+    }
+
     public int getPedidosNoEntregados() {
         return pedidosNoEntregados;
     }
 
-    public int getNivel() {
-        return nivel;
+    public void setPedidosNoEntregados(int pedidosNoEntregados) {
+        this.pedidosNoEntregados = pedidosNoEntregados;
     }
 
     public int getContadorPedidos() {
         return contadorPedidos;
     }
 
+    public void setContadorPedidos(int contadorPedidos) {
+        this.contadorPedidos = contadorPedidos;
+    }
+
+    public int getPuntosAcumuladosNivelActual() {
+        return puntosAcumuladosNivelActual;
+    }
+
     public Timestamp getFechaYHoraFin() {
         return fechaYHoraFin;
+    }
+
+    public void setFechaYHoraFin(Timestamp fechaYHoraFin) {
+        this.fechaYHoraFin = fechaYHoraFin;
     }
 
     public int getTiempoPartida() {
         return tiempoPartida;
     }
 
-    public int tiempoPartida() {
-        return tiempoPartida;
+    public void setTiempoPartida(int tiempoPartida) {
+        this.tiempoPartida = tiempoPartida;
     }
 
-    public int getFrecuenciaGeneracionPedidosNivel() {
-        return frecuenciaGeneracionPedidosNivel;
+    public int tiempoPartida() {
+        return tiempoPartida;
     }
 
     public int getPuntosParaSubirNivel2() {
@@ -132,16 +199,32 @@ public class Partida {
         return puntosParaSubirNivel3;
     }
 
+    public int getSegundosPorPedidoNivel1() {
+        return segundosPorPedidoNivel1;
+    }
+
+    public int getSegundosPorPedidoNivel2() {
+        return segundosPorPedidoNivel2;
+    }
+
+    public int getSegundosPorPedidoNivel3() {
+        return segundosPorPedidoNivel3;
+    }
+
     public int getMaximoPedidosActivos() {
         return maximoPedidosActivos;
     }
 
-    public void setPartidaActiva(boolean partidaActiva) {
-        this.partidaActiva = partidaActiva;
+    public int getFrecuenciaGeneracionPedidosNivel() {
+        return frecuenciaGeneracionPedidosNivel;
     }
 
-    public boolean isPartidaActiva() {
-        return partidaActiva;
+    public List<Producto> getProductosActivos() {
+        return productosActivos;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
     public void iniciarPartida() {
@@ -150,6 +233,15 @@ public class Partida {
         generadorPedidos.start();
     }
 
+    public void setIdSucursal(int idSucursal) {
+        this.idSucursal = idSucursal;
+    }
+
+    public int getIdSucursal() {
+        return idSucursal;
+    }
+
+    // Métodos públicos
     public void agregarPuntos(boolean esEficiente) {
         puntajeTotal += PUNTOS_POR_PEDIDO_ENTREGADO;
         if (esEficiente) {
@@ -185,26 +277,6 @@ public class Partida {
         }
         pedidosCancelados++;
         actualizable.actualizarPuntos(puntajeTotal);
-    }
-
-    private void verificarSubirNivel() {
-        if (nivel == 1 && puntosAcumuladosNivelActual >= puntosParaSubirNivel2) {
-            incrementarNivel();
-        } else if (nivel == 2 && puntosAcumuladosNivelActual >= puntosParaSubirNivel3) {
-            incrementarNivel();
-        }
-    }
-
-    private void incrementarNivel() {
-        this.puntosAcumuladosNivelActual = 0;
-        this.nivel++;
-        actualizable.subirNivel(nivel);
-        if (nivel == 2) {
-            System.out.println("puntos para subir nivel 3: " + puntosParaSubirNivel3);
-            actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel3);
-        } else if (nivel == 3) {
-            actualizable.ocultarPuntosParaSubirNivel();
-        }
     }
 
     public void eliminarPedido(FormaEliminacion formaEliminacion, Pedido pedido) {
@@ -280,24 +352,6 @@ public class Partida {
         quitarProductosInactivos();
     }
 
-    private void quitarProductosInactivos() {
-        for (Producto producto : productosActivos) {
-            if (!producto.isActivo()) {
-                productosActivos.remove(producto);
-            }
-        }
-    }
-
-    private int definirTiempoLimiteSegundosPorPedido() {
-        if (nivel == 1) {
-            return segundosPorPedidoNivel1;
-        } else if (nivel == 2) {
-            return segundosPorPedidoNivel2;
-        } else {
-            return segundosPorPedidoNivel3;
-        }
-    }
-
     public void definirconfiguracionPartida() throws SQLException {
         ConfiguracionJuegoDAO configuracionDAO = new ConfiguracionJuegoDAO();
         this.configuracionJuego = configuracionDAO.obtenerConfiguracion();
@@ -331,6 +385,45 @@ public class Partida {
         fechaYHoraFin = new Timestamp(System.currentTimeMillis());
         GuardadorDatosPartida guardador = new GuardadorDatosPartida(this);
         guardador.guardarDatosPartida();
+    }
+
+    // Métodos privados
+    private void verificarSubirNivel() {
+        if (nivel == 1 && puntosAcumuladosNivelActual >= puntosParaSubirNivel2) {
+            incrementarNivel();
+        } else if (nivel == 2 && puntosAcumuladosNivelActual >= puntosParaSubirNivel3) {
+            incrementarNivel();
+        }
+    }
+
+    private void incrementarNivel() {
+        this.puntosAcumuladosNivelActual = 0;
+        this.nivel++;
+        actualizable.subirNivel(nivel);
+        if (nivel == 2) {
+            System.out.println("puntos para subir nivel 3: " + puntosParaSubirNivel3);
+            actualizable.actualizarPuntosParaSubirNivel(puntosAcumuladosNivelActual, puntosParaSubirNivel3);
+        } else if (nivel == 3) {
+            actualizable.ocultarPuntosParaSubirNivel();
+        }
+    }
+
+    private void quitarProductosInactivos() {
+        for (Producto producto : productosActivos) {
+            if (!producto.isActivo()) {
+                productosActivos.remove(producto);
+            }
+        }
+    }
+
+    private int definirTiempoLimiteSegundosPorPedido() {
+        if (nivel == 1) {
+            return segundosPorPedidoNivel1;
+        } else if (nivel == 2) {
+            return segundosPorPedidoNivel2;
+        } else {
+            return segundosPorPedidoNivel3;
+        }
     }
 
 }

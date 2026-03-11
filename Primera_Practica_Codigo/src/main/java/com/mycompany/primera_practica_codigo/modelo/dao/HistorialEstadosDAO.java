@@ -3,7 +3,6 @@ package com.mycompany.primera_practica_codigo.modelo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
 import com.mycompany.primera_practica_codigo.util.ConexionBD;
 import com.mycompany.primera_practica_codigo.util.HistorialEstado;
 

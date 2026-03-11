@@ -150,6 +150,8 @@ public class FrameLogin extends javax.swing.JFrame {
                                 } else if (usuario.get().getRol() == Rol.ADMINISTRADOR_SUCURSAL) {
                                         FrameInicioAdministradorSucursal adminSucursal = new FrameInicioAdministradorSucursal(
                                                         usuarioLogeado);
+                                        
+                                        System.out.println("Sucursal ID usuario logeado" + usuarioLogeado.getSucursal().getId());
 
                                         adminSucursal.setVisible(true);
                                         this.dispose();

@@ -44,8 +44,24 @@ public class UsuarioDAO extends BDCRUD<Usuario, Integer> {
 
     @Override
     public Optional<Usuario> encontrarPorID(Integer id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String query = "SELECT * FROM usuario WHERE id = ?";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(rs.getInt("id"));
+                usuario.setNombreUsuario(rs.getString("nombre_usuario"));
+                usuario.setPassword(rs.getString("password"));
+                usuario.setRol(obtenerRolPorId(rs.getInt("rol_id")));
+                usuario.setSucursal(obtenerSucursalPorId(rs.getInt("sucursal_id")));
+                return Optional.of(usuario);
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error al encontrar usuario por ID: " + e.getMessage());
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -62,27 +78,6 @@ public class UsuarioDAO extends BDCRUD<Usuario, Integer> {
             return Optional.of(usuario);
         }
         return Optional.empty();
-    }
-
-    private UsuarioDatosSQL obtenerUsuarioDatosSQLPorNombre(String nombre) throws SQLException {
-        String query = "SELECT * FROM usuario WHERE nombre_usuario = ?";
-        try (Connection conn = ConexionBD.getConexion();
-                PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, nombre);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                UsuarioDatosSQL usuarioDatosSQL = new UsuarioDatosSQL();
-                usuarioDatosSQL.setId(rs.getInt("id"));
-                usuarioDatosSQL.setNombreUsuario(rs.getString("nombre_usuario"));
-                usuarioDatosSQL.setPassword(rs.getString("password"));
-                usuarioDatosSQL.setRolId(rs.getInt("rol_id"));
-                usuarioDatosSQL.setSucursalId(rs.getInt("sucursal_id"));
-                return usuarioDatosSQL;
-            }
-        } catch (SQLException e) {
-            throw new SQLException("Error al obtener datos SQL de usuario por nombre: " + e.getMessage());
-        }
-        return null;
     }
 
     @Override
@@ -205,6 +200,27 @@ public class UsuarioDAO extends BDCRUD<Usuario, Integer> {
         } catch (SQLException e) {
             throw new SQLException("Error al obtener sucursal por ID: " + e.getMessage(), e);
         }
+    }
+
+    private UsuarioDatosSQL obtenerUsuarioDatosSQLPorNombre(String nombre) throws SQLException {
+        String query = "SELECT * FROM usuario WHERE nombre_usuario = ?";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                UsuarioDatosSQL usuarioDatosSQL = new UsuarioDatosSQL();
+                usuarioDatosSQL.setId(rs.getInt("id"));
+                usuarioDatosSQL.setNombreUsuario(rs.getString("nombre_usuario"));
+                usuarioDatosSQL.setPassword(rs.getString("password"));
+                usuarioDatosSQL.setRolId(rs.getInt("rol_id"));
+                usuarioDatosSQL.setSucursalId(rs.getInt("sucursal_id"));
+                return usuarioDatosSQL;
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener datos SQL de usuario por nombre: " + e.getMessage());
+        }
+        return null;
     }
 
 }

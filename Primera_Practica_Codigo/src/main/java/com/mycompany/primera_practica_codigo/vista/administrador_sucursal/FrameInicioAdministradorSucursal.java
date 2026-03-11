@@ -4,6 +4,7 @@
  */
 package com.mycompany.primera_practica_codigo.vista.administrador_sucursal;
 
+import com.mycompany.primera_practica_codigo.modelo.entidades.Sucursal;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
 import com.mycompany.primera_practica_codigo.vista.FrameLogin;
 import com.mycompany.primera_practica_codigo.vista.administrador_sucursal.productos.FrameActivarDesactivarProducto;
@@ -19,6 +20,9 @@ import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
 
     private Usuario usuario;
+    private Sucursal sucursal;
+    private boolean esEstadisticaPartidasJugadas;
+    private boolean esEstadisticaRankingJugadores;
 
     /**
      * Creates new form FrameInicioAdminstradorSucursal
@@ -27,7 +31,10 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.usuario = usuario;
+        this.sucursal = usuario.getSucursal();
         colocarDatos();
+        this.esEstadisticaPartidasJugadas = false;
+        this.esEstadisticaRankingJugadores = false;
     }
 
     private void colocarDatos() {
@@ -46,7 +53,7 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -63,10 +70,6 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         jButtonEditarProducto = new javax.swing.JButton();
         jButtonActivarDesactivar = new javax.swing.JButton();
         jButtonListaProductos = new javax.swing.JButton();
-        jPanel15 = new javax.swing.JPanel();
-        jLabelReportes = new javax.swing.JLabel();
-        jButtonExportarRanking = new javax.swing.JButton();
-        jButtonExportarPartidas = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
@@ -116,11 +119,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
-                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 226, Short.MAX_VALUE));
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 308, Short.MAX_VALUE)
+        );
         jPanel10Layout.setVerticalGroup(
-                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 220, Short.MAX_VALUE));
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
 
         jPanel3.add(jPanel10);
 
@@ -164,38 +169,16 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
 
         jPanel3.add(jPanel9);
 
-        jPanel15.setLayout(new java.awt.GridLayout(0, 1, 0, 25));
-
-        jLabelReportes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelReportes.setText("Reportes");
-        jPanel15.add(jLabelReportes);
-
-        jButtonExportarRanking.setText("Exportar Ranking Jugadores");
-        jButtonExportarRanking.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExportarRankingActionPerformed(evt);
-            }
-        });
-        jPanel15.add(jButtonExportarRanking);
-
-        jButtonExportarPartidas.setText("Exportar Partidas Jugadas");
-        jButtonExportarPartidas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExportarPartidasActionPerformed(evt);
-            }
-        });
-        jPanel15.add(jButtonExportarPartidas);
-
-        jPanel3.add(jPanel15);
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
-                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 226, Short.MAX_VALUE));
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 308, Short.MAX_VALUE)
+        );
         jPanel8Layout.setVerticalGroup(
-                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 220, Short.MAX_VALUE));
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
 
         jPanel3.add(jPanel8);
 
@@ -206,11 +189,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 226, Short.MAX_VALUE));
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 226, Short.MAX_VALUE)
+        );
         jPanel13Layout.setVerticalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 105, Short.MAX_VALUE));
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 105, Short.MAX_VALUE)
+        );
 
         jPanel12.add(jPanel13);
 
@@ -249,11 +234,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 226, Short.MAX_VALUE));
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 226, Short.MAX_VALUE)
+        );
         jPanel16Layout.setVerticalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 105, Short.MAX_VALUE));
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 105, Short.MAX_VALUE)
+        );
 
         jPanel12.add(jPanel16);
 
@@ -264,11 +251,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
-                jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 321, Short.MAX_VALUE));
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 321, Short.MAX_VALUE)
+        );
         jPanel19Layout.setVerticalGroup(
-                jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 88, Short.MAX_VALUE));
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 88, Short.MAX_VALUE)
+        );
 
         jPanel17.add(jPanel19);
 
@@ -277,11 +266,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 321, Short.MAX_VALUE));
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 321, Short.MAX_VALUE)
+        );
         jPanel4Layout.setVerticalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 29, Short.MAX_VALUE));
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 29, Short.MAX_VALUE)
+        );
 
         jPanel20.add(jPanel4);
 
@@ -296,11 +287,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 321, Short.MAX_VALUE));
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 321, Short.MAX_VALUE)
+        );
         jPanel5Layout.setVerticalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 29, Short.MAX_VALUE));
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 29, Short.MAX_VALUE)
+        );
 
         jPanel20.add(jPanel5);
 
@@ -309,11 +302,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 321, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 321, Short.MAX_VALUE)
+        );
         jPanel18Layout.setVerticalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 88, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 88, Short.MAX_VALUE)
+        );
 
         jPanel17.add(jPanel18);
 
@@ -322,12 +317,13 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -361,28 +357,28 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
         this.dispose();
     }// GEN-LAST:event_jButtonActivarDesactivarActionPerformed
 
-    private void jButtonExportarRankingActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonExportarRankingActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButtonExportarRankingActionPerformed
-
-    private void jButtonExportarPartidasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonExportarPartidasActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButtonExportarPartidasActionPerformed
-
     private void jButtonVerPartidasJugadasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonVerPartidasJugadasActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        this.esEstadisticaPartidasJugadas = true;
+        this.esEstadisticaRankingJugadores = false;
+        FrameListaExportacion frameLista = new FrameListaExportacion(esEstadisticaPartidasJugadas,
+                esEstadisticaRankingJugadores, usuario);
+        frameLista.setVisible(true);
     }// GEN-LAST:event_jButtonVerPartidasJugadasActionPerformed
 
     private void jButtonRakingJugadoresActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRakingJugadoresActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        this.esEstadisticaPartidasJugadas = false;
+        this.esEstadisticaRankingJugadores = true;
+        FrameListaExportacion frameLista = new FrameListaExportacion(esEstadisticaPartidasJugadas,
+                esEstadisticaRankingJugadores, usuario);
+        frameLista.setVisible(true);
     }// GEN-LAST:event_jButtonRakingJugadoresActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActivarDesactivar;
     private javax.swing.JButton jButtonCerrarSesion;
     private javax.swing.JButton jButtonEditarProducto;
-    private javax.swing.JButton jButtonExportarPartidas;
-    private javax.swing.JButton jButtonExportarRanking;
     private javax.swing.JButton jButtonListaProductos;
     private javax.swing.JButton jButtonNuevoProducto;
     private javax.swing.JButton jButtonRakingJugadores;
@@ -393,7 +389,6 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNombreSucural;
     private javax.swing.JLabel jLabelNombreTycoon;
     private javax.swing.JLabel jLabelProductos;
-    private javax.swing.JLabel jLabelReportes;
     private javax.swing.JLabel jLabelSuperadministrador;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -401,7 +396,6 @@ public class FrameInicioAdministradorSucursal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;

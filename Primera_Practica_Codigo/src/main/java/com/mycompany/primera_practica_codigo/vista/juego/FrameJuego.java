@@ -208,6 +208,7 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -237,7 +238,7 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonRegresar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
@@ -322,8 +323,13 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
         jPanel3.add(jLabel8);
 
-        jButton1.setText("Regresar");
-        jPanel3.add(jButton1);
+        jButtonRegresar.setText("Regresar");
+        jButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegresarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonRegresar);
         jPanel3.add(jLabel9);
 
         jPanelOpcionesSalida.add(jPanel3);
@@ -345,8 +351,14 @@ public class FrameJuego extends javax.swing.JFrame implements Temporizable, Actu
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonRegresarActionPerformed
+        FrameInicioJugador frameInicioJugador = new FrameInicioJugador(usuario);
+        frameInicioJugador.setVisible(true);
+        this.dispose();
+    }// GEN-LAST:event_jButtonRegresarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonRegresar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;

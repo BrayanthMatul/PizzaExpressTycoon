@@ -5,18 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
+import com.mycompany.primera_practica_codigo.util.BDCRUD;
 import com.mycompany.primera_practica_codigo.util.ConexionBD;
-import com.mysql.cj.protocol.Resultset;
 
 /**
  *
  * @author Matul
  */
-public class PartidaDAO {
+public class PartidaDAO extends BDCRUD<Partida, Integer> {
 
     private Usuario jugador;
     private int puntajeTotal;
@@ -29,7 +31,8 @@ public class PartidaDAO {
     private int tiempoPartida;
     private Partida partida;
 
-    public void guardarPartida(Partida partida) throws SQLException {
+    @Override
+    public void insertar(Partida partida) throws SQLException {
         this.partida = partida;
         definirDatos();
 
@@ -56,6 +59,36 @@ public class PartidaDAO {
         }
     }
 
+    @Override
+    public Optional<Partida> encontrarPorID(Integer id) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'encontrarPorID'");
+    }
+
+    @Override
+    public Optional<Partida> encontrarPorNombre(String nombre) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'encontrarPorNombre'");
+    }
+
+    @Override
+    public List<Partida> obtenerTodo() throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'obtenerTodo'");
+    }
+
+    @Override
+    public void actualizar(Partida entidad) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    }
+
+    @Override
+    public void eliminar(Integer id) throws SQLException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+    }
+
     public int obtenerIdUltimaPartidaAgregada() throws SQLException {
         String query = "SELECT MAX(id) AS idPartida FROM partida";
         try (Connection conn = ConexionBD.getConexion();
@@ -76,11 +109,35 @@ public class PartidaDAO {
     }
 
     public List<Partida> obtenerPartidasPorSucursal(int idSucursal) throws SQLException {
-        return null;
+        List<Partida> partidas = obtenerTodasLasPartidas();
+        return filtrarPartidasPorSucursal(partidas, idSucursal);
     }
 
-    public List<Partida> obtenerTodasLasPartidas(Timestamp fechaInicio, Timestamp fechaFin) throws SQLException {
-        return null;
+    public List<Partida> obtenerTodasLasPartidas() throws SQLException {
+        String query = "SELECT * FROM partida";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            List<Partida> partidas = new ArrayList<>();
+            while (rs.next()) {
+                Partida partida = new Partida();
+                partida.setIdPartida(rs.getInt("id"));
+                partida.setIdUsuario(rs.getInt("id_usuario"));
+                partida.setIdSucursal(rs.getInt("id_sucursal"));
+                partida.setPuntajeTotal(rs.getInt("puntajeTotal"));
+                partida.setPedidosEntregados(rs.getInt("pedidosCompletados"));
+                partida.setPedidosCancelados(rs.getInt("pedidosCancelados"));
+                partida.setPedidosNoEntregados(rs.getInt("pedidosNoEntregados"));
+                partida.setNivel(rs.getInt("nivel"));
+                partida.setContadorPedidos(rs.getInt("contadorPedidos"));
+                partida.setFechaYHoraFin(rs.getTimestamp("fechaYHoraFin"));
+                partida.setTiempoPartida(rs.getInt("tiempoPartida"));
+                partidas.add(partida);
+            }
+            return partidas;
+        } catch (SQLException e) {
+            throw new SQLException("Error al obtener todas las partidas: " + e.getMessage());
+        }
     }
 
     private void definirDatos() {
@@ -93,5 +150,14 @@ public class PartidaDAO {
         this.contadorPedidos = partida.getContadorPedidos();
         this.fechaYHoraFin = partida.getFechaYHoraFin();
         this.tiempoPartida = partida.getTiempoPartida();
+    }
+
+    private List<Partida> filtrarPartidasPorSucursal(List<Partida> partidas, int idSucursal) {
+        for (int i = partidas.size() - 1; i >= 0; i--) {
+            if (partidas.get(i).getIdSucursal() != idSucursal) {
+                partidas.remove(i);
+            }
+        }
+        return partidas;
     }
 }

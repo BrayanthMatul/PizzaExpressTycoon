@@ -23,7 +23,7 @@ public class GuardadorDatosPartida {
 
     public void guardarDatosPartida() throws SQLException {
         PartidaDAO partidaDAO = new PartidaDAO();
-        partidaDAO.guardarPartida(partida);
+        partidaDAO.insertar(partida);
         idPartida = partidaDAO.obtenerIdUltimaPartidaAgregada();
         guardarDatosPedidos();
         guardarDatosJugador();
@@ -54,7 +54,7 @@ public class GuardadorDatosPartida {
 
         jugadorExiste = jugadorDAO.JugadorExiste(partida.getJugador().getIdUsuario());
         if (jugadorExiste) {
-            jugador = jugadorDAO.obtenerJugadorPorId(partida.getJugador().getIdUsuario());
+            jugador = jugadorDAO.encontrarPorID(partida.getJugador().getIdUsuario()).orElse(null);
             actualizarJugadorExistente(jugador);
         } else {
             jugador = new Jugador();
@@ -74,7 +74,7 @@ public class GuardadorDatosPartida {
         jugador.setPuntajeMaximo(partida.getPuntajeTotal());
         jugador.setPuntajeTotalAcumulado(partida.getPuntajeTotal());
 
-        jugadorDAO.guardarJugador(jugador);
+        jugadorDAO.insertar(jugador);
     }
 
     private void actualizarJugadorExistente(Jugador jugador) throws SQLException {
@@ -89,6 +89,6 @@ public class GuardadorDatosPartida {
         jugador.setPuntajeTotalAcumulado(nuevoPuntajeTotalAcumulado);
 
         JugadorDAO jugadorDAO = new JugadorDAO();
-        jugadorDAO.actualizarJugador(jugador);
+        jugadorDAO.actualizar(jugador);
     }
 }

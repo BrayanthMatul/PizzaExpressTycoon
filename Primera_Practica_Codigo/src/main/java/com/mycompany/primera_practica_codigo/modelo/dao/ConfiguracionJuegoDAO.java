@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.mycompany.primera_practica_codigo.modelo.entidades.ConfiguracionJuego;
 import com.mycompany.primera_practica_codigo.util.ConexionBD;
 

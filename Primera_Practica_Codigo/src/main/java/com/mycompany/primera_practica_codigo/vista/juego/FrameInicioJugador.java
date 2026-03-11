@@ -4,10 +4,14 @@
  */
 package com.mycompany.primera_practica_codigo.vista.juego;
 
+import java.sql.SQLException;
+
+import com.mycompany.primera_practica_codigo.modelo.dao.JugadorDAO;
+import com.mycompany.primera_practica_codigo.modelo.entidades.Jugador;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
 import com.mycompany.primera_practica_codigo.vista.FrameLogin;
-import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
+import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
 
 /**
  *
@@ -16,15 +20,28 @@ import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 public class FrameInicioJugador extends javax.swing.JFrame {
 
         private Usuario usuario;
+        private Jugador jugador;
 
         /**
          * Creates new form FrameInicioJugador
+         * 
+         * @param usuario
          */
         public FrameInicioJugador(Usuario usuario) {
                 initComponents();
                 setLocationRelativeTo(null);
                 this.usuario = usuario;
-                
+                cargarJugador();
+        }
+
+        private void cargarJugador() {
+                JugadorDAO jugadorDAO = new JugadorDAO();
+                try {
+                        this.jugador = jugadorDAO.encontrarPorID(usuario.getIdUsuario()).orElse(null);
+                } catch (SQLException e) {
+                        String mensajeError = "Error al cargar los datos del jugador: " + e.getMessage();
+                        MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+                }
         }
 
         /**
@@ -188,7 +205,6 @@ public class FrameInicioJugador extends javax.swing.JFrame {
         private void jButtonIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonIniciarPartidaActionPerformed
                 Partida partida = new Partida(usuario);
                 partida.iniciarPartida();
-
                 this.dispose();
         }// GEN-LAST:event_jButtonIniciarPartidaActionPerformed
 
@@ -199,7 +215,9 @@ public class FrameInicioJugador extends javax.swing.JFrame {
         }// GEN-LAST:event_jButtonCerrarSesionActionPerformed
 
         private void jButtonMisEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonMisEstadisticasActionPerformed
-                // TODO add your handling code here:
+                FrameMisEstadisticas frameMisEstadisticas = new FrameMisEstadisticas(jugador, usuario);
+                frameMisEstadisticas.setVisible(true);
+                this.dispose();
         }// GEN-LAST:event_jButtonMisEstadisticasActionPerformed
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
