@@ -11,6 +11,7 @@ import com.mycompany.primera_practica_codigo.modelo.dao.ProductoDAO;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Producto;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
 import com.mycompany.primera_practica_codigo.vista.MensajeErrorFrame;
+import com.mycompany.primera_practica_codigo.vista.MensajeExitoFrame;
 import com.mycompany.primera_practica_codigo.vista.administrador_sucursal.FrameInicioAdministradorSucursal;
 import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 
@@ -259,7 +260,7 @@ public class FrameActivarDesactivarProducto extends javax.swing.JFrame {
         try {
             productoDAO.activarDesactivarProducto(producto.getId(), activar);
             String mensaje = activar ? "Producto activado exitosamente." : "Producto desactivado exitosamente.";
-            MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensaje);
+            MensajeExitoFrame mensajeExitoFrame = new MensajeExitoFrame(null, true, mensaje);
             cargarProductos(); // Recargar la lista de productos para reflejar el cambio
         } catch (SQLException e) {
             String mensajeError = "Error al actualizar el estado del producto: " + e.getMessage();

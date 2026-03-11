@@ -46,6 +46,7 @@ public class MensajeExitoFrame extends javax.swing.JDialog {
         jbuttonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(63, 200));
 
         panelElementos.setLayout(new java.awt.GridLayout(0, 1, 0, 20));
 
