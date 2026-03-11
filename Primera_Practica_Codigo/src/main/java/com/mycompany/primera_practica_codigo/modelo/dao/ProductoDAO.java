@@ -132,4 +132,19 @@ public class ProductoDAO extends BDCRUD<Producto, Integer> {
                                                                        // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public boolean hayProductosActivosEnSucursal(Integer idSucursal) throws SQLException {
+        String query = "SELECT COUNT(*) AS total FROM producto WHERE activo = true AND sucursal_id = ?";
+        try (Connection conn = ConexionBD.getConexion();
+                PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, idSucursal);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total") > 0;
+            }
+            return false;
+        } catch (SQLException e) {
+            throw new SQLException("Error al verificar productos activos: " + e.getMessage());
+        }
+    }
+
 }

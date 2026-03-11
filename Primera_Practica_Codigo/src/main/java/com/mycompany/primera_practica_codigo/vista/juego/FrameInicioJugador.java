@@ -7,6 +7,7 @@ package com.mycompany.primera_practica_codigo.vista.juego;
 import java.sql.SQLException;
 
 import com.mycompany.primera_practica_codigo.modelo.dao.JugadorDAO;
+import com.mycompany.primera_practica_codigo.modelo.dao.ProductoDAO;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Jugador;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Partida;
 import com.mycompany.primera_practica_codigo.modelo.entidades.Usuario;
@@ -203,10 +204,26 @@ public class FrameInicioJugador extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
         private void jButtonIniciarPartidaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonIniciarPartidaActionPerformed
+                if (!hayProductosActivosParaInciarPartida()) {
+                        String mensajeError = "No hay productos activos para iniciar una nueva partida.";
+                        MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+                        return;
+                }
                 Partida partida = new Partida(usuario);
                 partida.iniciarPartida();
                 this.dispose();
         }// GEN-LAST:event_jButtonIniciarPartidaActionPerformed
+
+        private boolean hayProductosActivosParaInciarPartida() {
+                ProductoDAO productoDAO = new ProductoDAO();
+                try {
+                        return productoDAO.hayProductosActivosEnSucursal(usuario.getSucursal().getId());
+                } catch (SQLException e) {
+                        String mensajeError = "Error al verificar productos activos: " + e.getMessage();
+                        MensajeErrorFrame mensajeErrorFrame = new MensajeErrorFrame(null, true, mensajeError);
+                        return false;
+                }
+        }
 
         private void jButtonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonCerrarSesionActionPerformed
                 this.dispose();
